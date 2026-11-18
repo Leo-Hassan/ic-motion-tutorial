@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VirtualAxis xmlns:xsd="http://www.w3.org/2001/XMLSchema" AxisName="AxisX" GlobalName="AxisX" InitialPosition="0" MinimumPosition="-100" MaximumPosition="100" MaximumVelocity="100" MaximumAcceleration="100" MaximumDeceleration="100" PeriodSeconds="0.001"/>

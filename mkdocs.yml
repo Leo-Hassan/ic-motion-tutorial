@@ -1,6 +1,8 @@
 site_name: 大桥 IDE / IC Motion 中文教程
 site_description: 面向外部读者的版本化离线编程与仿真教程
 site_url: https://Leo-Hassan.github.io/ic-motion-tutorial/
+repo_url: https://github.com/Leo-Hassan/ic-motion-tutorial
+repo_name: 教程源码与示例工程
 docs_dir: docs
 site_dir: site
 use_directory_urls: true
@@ -19,7 +21,8 @@ theme:
     - search.highlight
     - content.code.copy
 plugins:
-  - search
+  - search:
+      lang: zh
 markdown_extensions:
   - admonition
   - attr_list
@@ -32,6 +35,12 @@ extra_css:
   - assets/stylesheets/extra.css
 nav:
   - 教程入口: index.md
+  - V0.0.17 手册（本地候选）:
+      - 手册首页: v0.0.17/index.md
+      - 版本与证据: v0.0.17/versions.md
+      - 截图来源: assets/images/v0.0.17/PROVENANCE.md
+      - 软件操作: v0.0.17/operations.md
+      - 01 虚轴首次运动: v0.0.17/cases/01-first-virtual-axis.md
   - V0.0.14 手册:
       - 手册首页: v0.0.14/index.md
       - 版本与证据: v0.0.14/versions.md

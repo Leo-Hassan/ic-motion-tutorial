@@ -1,6 +1,38 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：阶段一完成，阶段二甲虚轴工程离线验证完成，案例页面尚未完成。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 改版 UI 首章和软件操作截图已完成，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三甲：V0.0.17 改版 UI 与案例 01（2026-11-18）
+
+V0.0.17 本地候选主包版本回查为 `Industrial Control Platform V0.0.17`；
+发布源码提交 `8f743aa19cc49012b5cfec38a49d15d95fb9facd`，主包归档 SHA-256
+`5606204f00e3bc1d21fbdf1690f57b964f75d1889e5f17c3c0efa69e162216e5`。
+发布仓库的本地包内门禁和归档解压后的全新安装复验均 PASS，硬件操作 0；
+这些属于软件/GUI 验证。文档追记提交 `53daa23` 不改变归档身份。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 包内真实 GUI | 从 V0.0.17 包启动，`ps` 指向包内 `Beremiz.py`；红色标题栏、活动栏、工程树可见，底部 `Disconnected`、`Online:OFFLINE` |
+| V0.0.17 工程副本 Clean Build | `scripts/clean_build.sh` 返回 0；SO SHA-256 `e399feb39f2ef3c8e6d2f827b2a9fb095c14a60fc72f3a83dbdbb242dee91206`；变量表 `343dae36ad190944733dac699e2c6fb3bd977632ed49021a6967157c718a3544` |
+| 包内控制器离线仿真 | 从教程工程临时副本重开，`LoadProject=(None,False)`；`cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0` |
+| 真实 GUI 离线仿真 | 在包内 IDE 打开同工程临时副本，XTEST 输入 `Ctrl+Alt+M`，结果框显示 3056 周期、X=3.000000、ErrorID=0；生成结果 JSON 与控制器仿真一致 |
+| 截图来源 | wx `ScreenDC` 从真实窗口直接截取 4 张 PNG；版本/进程/摘要见 `docs/assets/images/v0.0.17/PROVENANCE.md` |
+| MkDocs 严格构建 | `PYTHONPATH=.deps python3 -m mkdocs build --strict` 返回 0；章节页、图像、代码高亮与 `lang=zh` 搜索索引生成；浏览器桌面和手机验收仍待执行 |
+| 静态链接检查 | 扫描生成的 123 条站内图片/页面链接，按 GitHub Pages `/ic-motion-tutorial/` 前缀解析后缺失 0；搜索索引 29 条，首例和 `MC_MoveAbsolute` 正文均在索引/HTML 中 |
+| 板端与实机 | SKIP：无本轮单独授权，未连接、部署、运行或写设备 |
+
+一次手工直接调用包内 `Beremiz.py` 时误将包内 `python/` 加入 Python 3.8 的
+`PYTHONPATH`，其 `lxml` 与系统解释器不兼容，真实 GUI 弹出 ImportError 并退出；
+按正式启动器环境只使用 `compat-python` 和 `beremiz` 后，工程窗口正常打开，
+编辑、构建及仿真通过。此错误启动不计 IDE 验收 PASS。
+首次手工写错构建入口 `.deps/bin/mkdocs`，命令返回 127；实际依赖通过
+`PYTHONPATH=.deps python3 -m mkdocs` 使用，纠正后严格构建返回 0。
+首次静态链接脚本未识别站点的 `/ic-motion-tutorial/` 部署前缀，误报 10 条缺失；
+按 `site_url` 前缀解析后复核 123 条链接，缺失 0。该首轮误报不计真实断链。
+
+本阶段尚未完成约 12 案例、每例截图、全站浏览器验收、GitHub Pages 与公开发布；
+不能将首例或发布包离线门禁外推到这些未完成项。V0.0.17 仍为本地候选，
+没有公开 IDE 发布标签或下载地址。
 
 ## 阶段一：版本与站点骨架（2026-11-18）
 

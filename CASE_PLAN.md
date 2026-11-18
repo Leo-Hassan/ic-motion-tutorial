@@ -1,4 +1,4 @@
-用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：已完成源码盘点与首次虚轴运动离线仿真；案例正文和截图仍待逐项验收。
+用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：V0.0.17 首次虚轴运动章节、真实截图和离线仿真完成；其余主题待逐项验收。
 
 # 案例覆盖计划
 
@@ -6,7 +6,7 @@
 
 | 编号 | 主题 | 候选工程目录 | 关键 POU / 资源 | 当前状态 |
 | --- | --- | --- | --- | --- |
-| 01 | 虚轴首次运动 | 教程专用 `examples/v0.0.14/FirstVirtualAxis/`，由包内 `preview_project.create_project` 生成 | `plc.xml/MAIN`；`AxisX@VirtualAxis/confnode.xml` | 教程副本重开、Clean Build、离线仿真通过；正文和截图待写 |
+| 01 | 虚轴首次运动 | 教程专用 `examples/v0.0.17/FirstVirtualAxis/`，沿用 V0.0.14 生成工程并用 V0.0.17 包复验 | `plc.xml/MAIN`；`AxisX@VirtualAxis/confnode.xml` | V0.0.17 Clean Build、真实 GUI 仿真、正文与截图 PASS；实机 SKIP |
 | 02 | ST 功能块调用与命令交接 | `ic-beremiz-motion/examples/beremiz_virtual_axis/` | `plc.xml/MAIN` 中 `MoveAbsA/B/C/D` | 待验证 |
 | 03 | ST 断点与单步 | `beremiz/tests/projects/st_current_value/` | `plc.xml/MAIN`；`Config0/Res0/MainTask` | 待验证 |
 | 04 | 梯形图编辑与仿真 | `ic-beremiz-motion/examples/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 待验证 |
@@ -19,4 +19,4 @@
 | 11 | 跟踪切 | `ic-beremiz-motion/examples/beremiz_process_cutting/` | `TrackingRecipe@ProcessRecipe` | 待验证 |
 | 12 | 飞剪与旋切 | 同上，分两套操作与预期结果 | `SawRecipe@ProcessRecipe`、`KnifeRecipe@ProcessRecipe` | 待验证 |
 
-工作区 `ic-beremiz-motion` 已锁定于 V0.0.14 组件提交 `29ca588ca3e1190acf751e9e3353a30d5222f44d`。`IGH_RK_1.6-master` 锁定于 `e6308f19cafe6c591e2dea0c8ba92b0349b746be`。Beremiz 源码版新版 UI 为 `06f5b1e0e45faecac96d790ab03e57be46d4fd2d`，尚无对应发布包；案例版本以最终实际包身份为准。
+首例工程原生成器来自 `ic-beremiz-motion` V0.0.14 组件提交 `29ca588ca3e1190acf751e9e3353a30d5222f44d`；V0.0.17 包锁定扩展 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 和改版 Beremiz `06f5b1e0e45faecac96d790ab03e57be46d4fd2d`，本地软件与全新安装门禁 PASS，但未创建公开发布标签。`IGH_RK_1.6-master` 锁定于 `e6308f19cafe6c591e2dea0c8ba92b0349b746be`。其余案例版本须以实际包复验结果为准。
