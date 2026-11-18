@@ -10,7 +10,7 @@
 | 02 | ST 功能块调用与命令交接 | `examples/v0.0.17/beremiz_virtual_axis/` | `plc.xml/MAIN` 中 `MoveAbsA/B/C/D` | 包内 Clean Build 与 IDE Build PASS；同源码 LookAhead 仿真 PASS；本例自动 GUI 仿真 SKIP |
 | 03 | ST 断点与单步 | `beremiz/tests/projects/st_current_value/` | `plc.xml/MAIN`；`Config0/Res0/MainTask` | 待验证 |
 | 04 | 梯形图编辑与仿真 | `examples/v0.0.17/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 原工程 Clean Build、真实 IDE Build、保存工程仿真 PASS；触点取反后 Build FAIL（V0.0.17 已知问题） |
-| 05 | 轴配置与限位 | `ic-beremiz-motion/examples/beremiz_v12_basic/` | 虚轴配置节点与 `plc.xml/MAIN` | 待验证 |
+| 05 | 轴配置与限位 | 与 01 共用 `examples/v0.0.17/FirstVirtualAxis/` | `AxisX@VirtualAxis/confnode.xml` 与 `plc.xml/MAIN` | 配置读取、同工程 Clean Build 和范围内虚轴仿真 PASS；越界故障注入 SKIP |
 | 06 | 设备映射与 CiA 402 | `ic-beremiz-motion/examples/beremiz_device_mapping/` 和 `beremiz_cia402_axis/` | `device-catalog.json`；`Axis_1@Cia402RealAxis/confnode.xml` | 待验证 |
 | 07 | IS620N 实轴工程离线配置与构建 | `IGH_RK_1.6-master/beremiz_projects/is620n_cia402_dual_circle_online/` | `plc.xml/DualCirclePanel`；双轴配置与 C 扩展 | 只做离线，待敏感信息审查与 Clean Build |
 | 08 | 电子齿轮 | `ic-beremiz-motion/examples/beremiz_sync_gear_cam/` | `plc.xml/MAIN`；`Synchronization@SyncConfiguration` | 待验证 |
