@@ -49,6 +49,7 @@ nav:
       - 07 IS620N 双实轴离线构建: v0.0.17/cases/07-is620n-offline-build.md
       - 08 电子齿轮与相位调整: v0.0.17/cases/08-electronic-gear.md
       - 09 电子凸轮与表切换: v0.0.17/cases/09-electronic-cam.md
+      - 10 二维协调路径: v0.0.17/cases/10-two-dimensional-path.md
   - V0.0.14 手册:
       - 手册首页: v0.0.14/index.md
       - 版本与证据: v0.0.14/versions.md

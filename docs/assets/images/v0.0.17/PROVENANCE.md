@@ -1,4 +1,4 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：34 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：38 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
@@ -8,7 +8,9 @@ ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizI
 
 IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临时教学副本；为本地离线交叉构建，在**临时** `confnode.xml` 将 IgH SDK 占位符换为本机 SDK 路径，教程仓库文件仍不含绝对路径。GUI 无 Runtime 连接，未导入原工程的 `psk/`、`build/`、`TEST_REPORT.md` 或历史测试物。外部 `gnome-screenshot` 全屏实拍后只裁剪 IDE 窗口区域。
 
-同步工程六图从同包 `Beremiz.py` 打开 `beremiz_sync_gear_cam` 的临时副本。真实鼠标打开 `MAIN`、Synchronization、Cam_A 和 Cam_B；原始保存工程的 V0.0.17 GUI Build 显示 `Successfully built.`。首次在打开编辑器后立即 F11 遇到 `wxYield called recursively`，重启真实 IDE，等工程加载完成再从未编辑副本执行 Build 成功；该失败列入测试报告。六图均为外部 `gnome-screenshot` 实拍，只裁剪窗口区域；本次截图没有包含首次报错对话框，因为案例使用后续可复现的成功步骤。所有 34 张均未绘制、合成或 AI 生成 UI。
+同步工程六图从同包 `Beremiz.py` 打开 `beremiz_sync_gear_cam` 的临时副本。真实鼠标打开 `MAIN`、Synchronization、Cam_A 和 Cam_B；原始保存工程的 V0.0.17 GUI Build 显示 `Successfully built.`。首次在打开编辑器后立即 F11 遇到 `wxYield called recursively`，重启真实 IDE，等工程加载完成再从未编辑副本执行 Build 成功；该失败列入测试报告。六图均为外部 `gnome-screenshot` 实拍，只裁剪窗口区域；本次截图没有包含首次报错对话框，因为案例使用后续可复现的成功步骤。
+
+二维路径四图从同包 `Beremiz.py` 打开 `beremiz_coordinated_path` 的未编辑临时副本；先完成 GUI Build，再用真实鼠标打开 `Group_XY`、`MixedPath` 和 `MAIN`。外部 `gnome-screenshot` 拍全屏，只裁剪真实 IDE 窗口区域；图 4 保留同屏的 Build 成功 Console。所有 38 张均未绘制、合成或 AI 生成 UI。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -46,5 +48,9 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 | `sync-cam-b.png` | 双击 Cam_B，查看三点负三角形表与预览 | `a64bac257df01fe6592850935de4cc1d86b15686669d81fff9512e5f5ff96821` |
 | `sync-cam-st.png` | 回到 `MAIN`，查看 CamTableSelect、ActiveCamTable、CamIn 和 CamOut | `5be50f3e5590e1bccfc7c98099f71f30463c1ebb72ea7ce5dcad21ec99d0971c` |
 | `sync-gui-build-result.png` | 全新 IDE 进程中，未编辑工程 GUI Build 成功；Console、工程树和 `MAIN` 同屏 | `e81ee92de98d372f912728ac18963ea2112a7c1ce42e1e2d9acc83ef246bd06d` |
+| `path-axis-group.png` | 双击 Group_XY，显示 AxisX/AxisY 成员和资源树 | `dff109d39d9a86286b85096cf03ba4106d45769f2cc58ae7714a0d1957aa64e1` |
+| `path-mixed-recipe.png` | 双击 MixedPath，显示八段二维路径表和预览 | `2529038700474944e6c1919d250e2221448ae5e24ce80f3bf698dc818688a83d` |
+| `path-st-editor.png` | 打开 `MAIN`，显示上电、轴组使能和配方选择起始代码 | `baf4b977fadc879041e6db75aab361cf0ecd3265c19d203acbddc55f81f93d9d` |
+| `path-build-result.png` | `MAIN` 中查看 CoordinatedPath/GroupStop，Console 显示 `Successfully built.` | `d9373ea9cff510e4e0620306da4432992416044b4cf731b03bd7395283328282` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。

@@ -1,6 +1,21 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～09 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～10 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三辛：二维协调路径（2026-11-18）
+
+工程从 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_coordinated_path/` 复制 19 个跟踪文件，包含原始 manifest、两根虚轴、XY 组和四个 PathRecipe。目标只在主机离线运行，`PathTask=T#1ms` 是软件配置值，不等于硬实时周期实测。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| V0.0.17 包内保存工程测试 | 首次会话在第一项测试后以退出码 143 中断，没有完整判定；独立复跑 `scripts/verify_coordinated_path.sh` 返回 0，2/2 PASS，耗时 108.285 秒。工程生成/保存/重开/另存/备份/恢复 PASS；两次 Clean Build 八项摘要一致 |
+| 保存工程 C 仿真 | 从本工程生成的共享库运行包内 C 夹具，八段绝对/相对直线、CCW/CW 圆弧、整圆、跨零、样条、混合过渡、固定前瞻/轮廓、QueueExhausted、GroupStop，以及限位/退化/非切线/无效配方与反馈无效均 PASS；终点 `(0,0)`，最大轮廓误差 `<0.01` 是夹具断言，不是硬件测量 |
+| 独立 CLI Clean Build | `scripts/clean_build.sh` 返回 0；SO SHA-256 `c414e528b6a9f3305ae861acd3263ccbfb1a8ee6576dc5be425f930729ad75df`，变量表 `46388008c6236388a031412a22325b39f28be58626cac4562313043359509f07`；与保存工程测试两次结果一致，工程身份 `g2 d010d5409c7c` |
+| 真实 IDE GUI Build | 全新 V0.0.17 包内 `Beremiz.py` 打开未编辑临时副本，点击 Build，Console `Successfully built.`；SO/变量表完整哈希与 CLI 逐字节一致。底栏 `Online:OFFLINE`，无生产 Runtime 连接 |
+| 真实截图 | Group_XY、MixedPath 八段预览、`MAIN` 起始 ST 和 Build 成功 ST/Console 四图；全部由外部 `gnome-screenshot` 实拍 V0.0.17 包内 wx 窗口并裁剪，摘要见 `PROVENANCE.md` |
+| 板端与实机 | SKIP：未执行板端 Stop/Transfer/Run、Force、SDO 写入或电机运动；没有 PDO/DC、机械轨迹或安全验收 |
+
+首次测试会话的 143 中断没有留下完整 traceback 或可靠原因，不能归因为工程缺陷或算通过；只将完整复跑计入 PASS。包内 Python 测试输出两条 `ResourceWarning: unclosed file`，未改变测试判定。19 个工程文件与锁定来源逐字节相同；`sh -n` 和 `git diff --check` PASS。站点 `mkdocs build --strict` 返回 0，生成 18 个 HTML 页面、73 条搜索索引；扫描 572 条站内页面/资源链接缺失 0，38 张 V0.0.17 PNG 与来源表摘要全部匹配。新工程/章节/脚本的本机绝对路径、私钥头、口令赋值及私有网段模式扫描命中 0。真实浏览器桌面/手机验收及公开发布仍待后续阶段。
 
 ## 阶段三庚：电子齿轮、相位与电子凸轮（2026-11-18）
 

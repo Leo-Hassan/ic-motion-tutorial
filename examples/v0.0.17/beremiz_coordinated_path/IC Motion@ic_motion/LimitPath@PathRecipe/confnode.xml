@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PathRecipe xmlns:xsd="http://www.w3.org/2001/XMLSchema" RecipeName="LimitPath" GlobalName="Path_Limit" SegmentsJSON="[{&quot;kind&quot;:&quot;LinearAbsolute&quot;,&quot;buffer_mode&quot;:&quot;Aborting&quot;,&quot;target&quot;:[20,0,0],&quot;velocity&quot;:2,&quot;acceleration&quot;:8,&quot;deceleration&quot;:8,&quot;jerk&quot;:0}]"/>

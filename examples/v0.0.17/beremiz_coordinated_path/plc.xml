@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6.xsd">
+  <fileHeader companyName="Industrial Control Platform" productName="Coordinated Interpolation Simulation" productVersion="16.1.0" creationDateTime="2026-09-29T00:01:46"/>
+  <contentHeader name="IC Motion Coordinated Path" version="16.1.0" modificationDateTime="2026-09-29T00:01:47">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="8" y="8"/>
+      </fbd>
+      <ld>
+        <scaling x="8" y="8"/>
+      </ld>
+      <sfc>
+        <scaling x="8" y="8"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <externalVars>
+            <variable name="AxisX">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="AxisY">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="Group_XY">
+              <type>
+                <derived name="AXIS_GROUP_REF"/>
+              </type>
+            </variable>
+            <variable name="Path_Mixed">
+              <type>
+                <derived name="PATH_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Path_Limit">
+              <type>
+                <derived name="PATH_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Path_Degenerate">
+              <type>
+                <derived name="PATH_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Path_NonTangent">
+              <type>
+                <derived name="PATH_RECIPE_REF"/>
+              </type>
+            </variable>
+          </externalVars>
+          <localVars>
+            <variable name="ActiveRecipe">
+              <type>
+                <derived name="PATH_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="PowerX">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="PowerY">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="GroupEnable">
+              <type>
+                <derived name="MC_GroupEnable"/>
+              </type>
+            </variable>
+            <variable name="CoordinatedPath">
+              <type>
+                <derived name="IC_CoordinatedPath"/>
+              </type>
+            </variable>
+            <variable name="GroupStop">
+              <type>
+                <derived name="MC_GroupStop"/>
+              </type>
+            </variable>
+            <variable name="AxisEnable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="GroupEnableRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="PathRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="GroupStopRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseBadRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseLimitRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseDegenerateRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseNonTangentRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p><![CDATA[PowerX(Axis := AxisX, Enable := AxisEnable);
+PowerY(Axis := AxisY, Enable := AxisEnable);
+GroupEnable(AxesGroup := Group_XY, Execute := GroupEnableRequest);
+
+IF UseBadRecipe THEN
+    ActiveRecipe := 0;
+ELSIF UseLimitRecipe THEN
+    ActiveRecipe := Path_Limit;
+ELSIF UseDegenerateRecipe THEN
+    ActiveRecipe := Path_Degenerate;
+ELSIF UseNonTangentRecipe THEN
+    ActiveRecipe := Path_NonTangent;
+ELSE
+    ActiveRecipe := Path_Mixed;
+END_IF;
+
+CoordinatedPath(AxesGroup := Group_XY, PathRecipe := ActiveRecipe,
+                Execute := PathRequest);
+GroupStop(AxesGroup := Group_XY, Execute := GroupStopRequest);
+]]></xhtml:p>
+          </ST>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="config">
+        <resource name="resource1">
+          <task name="PathTask" priority="0" interval="T#1ms">
+            <pouInstance name="MAIN0" typeName="MAIN"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

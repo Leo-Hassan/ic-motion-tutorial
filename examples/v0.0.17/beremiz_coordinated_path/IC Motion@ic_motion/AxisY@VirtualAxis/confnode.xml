@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VirtualAxis xmlns:xsd="http://www.w3.org/2001/XMLSchema" AxisName="Coordinated Y" GlobalName="AxisY" InitialPosition="0" MinimumPosition="-10" MaximumPosition="10" MaximumVelocity="5"/>
