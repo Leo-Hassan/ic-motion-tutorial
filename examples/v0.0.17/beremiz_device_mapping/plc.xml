@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <fileHeader companyName="Industrial Control Platform"
+              productName="Offline Device Mapping Demo"
+              productVersion="0.1.0" creationDateTime="2026-09-08T00:00:00"/>
+  <contentHeader name="P01d Offline Mapping Demo"
+                 modificationDateTime="2026-09-08T00:00:00">
+    <coordinateInfo><fbd><scaling x="8" y="8"/></fbd><ld><scaling x="8" y="8"/></ld><sfc><scaling x="8" y="8"/></sfc></coordinateInfo>
+  </contentHeader>
+  <types><dataTypes/><pous>
+    <pou name="MAIN" pouType="program">
+      <interface><externalVars>
+        <variable name="InputBool"><type><BOOL/></type></variable>
+        <variable name="InputValue"><type><DINT/></type></variable>
+        <variable name="OutputBool"><type><BOOL/></type></variable>
+        <variable name="OutputValue"><type><DINT/></type></variable>
+      </externalVars></interface>
+      <body><ST><xhtml:p><![CDATA[OutputBool := NOT InputBool;
+OutputValue := InputValue + 17;
+]]></xhtml:p></ST></body>
+    </pou>
+  </pous></types>
+  <instances><configurations><configuration name="Config0">
+    <resource name="Resource0">
+      <task name="MainTask" priority="0" interval="T#1ms">
+        <pouInstance name="MAIN0" typeName="MAIN"/>
+      </task>
+    </resource>
+    <globalVars>
+      <variable name="InputBool"><type><BOOL/></type></variable>
+      <variable name="InputValue"><type><DINT/></type></variable>
+      <variable name="OutputBool"><type><BOOL/></type></variable>
+      <variable name="OutputValue"><type><DINT/></type></variable>
+    </globalVars>
+  </configuration></configurations></instances>
+</project>

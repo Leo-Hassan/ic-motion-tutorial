@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- 离线占位参数，禁止未经设备门禁确认直接用于上电。 -->
+<Cia402RealAxis AxisName="Axis_1" GlobalName="Axis_1" Mode="CSP"
+  CountsPerUnit="1000.0" MinimumPosition="-10.0" MaximumPosition="10.0"
+  MaximumVelocity="0.1" MaximumAcceleration="0.2" MaximumDeceleration="0.2"
+  PLCPeriodSeconds="0.001" BusPeriodSeconds="0.001" TransportChannel="1"
+  SoftwareZero="true"/>

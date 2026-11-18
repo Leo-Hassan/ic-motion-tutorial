@@ -43,3 +43,5 @@
 ST 断点/单步与生产在线只读监视的边界将在独立案例中逐项演示；本页的批量离线仿真不具备断点与单步能力。
 
 已发现 V0.0.17 的特定 LD 编辑失败：在 Basic 17 LD 临时副本中把 `Enable` 触点从 Normal 改为 Negated 后，图形编辑器保存出回环连线，随后 `F11` 抛 `RecursionError`。详见[案例 04](cases/04-ld-edit-simulate.md)；原工程的 Build 和保存工程仿真结果不覆盖该失败。
+
+V0.0.17 正式启动器尚未把包内 `ic-device-library/python` 加入映射编辑器的 Python 路径；打开 `Mapping` 页会报 `No module named ic_device_catalog`。本版本的[案例 06](cases/06-device-mapping-cia402.md)提供只启动包内 GUI 的版本核对离线入口；两工程 Clean Build 与模拟过程映像测试结果不覆盖正式启动器缺陷。

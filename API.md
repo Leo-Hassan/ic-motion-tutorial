@@ -1,4 +1,4 @@
-用途：说明教程仓库对读者的稳定入口和离线构建脚本。当前状态：V0.0.17 首页、首章和包内 Clean Build 脚本已验证；没有运行时 API。
+用途：说明教程仓库对读者的稳定入口和离线脚本。当前状态：V0.0.17 页面、包内 Clean Build 与映射页临时离线入口已有验证；没有运行时 API。
 
 # 阅读与工程入口
 
@@ -14,3 +14,5 @@
 `scripts/clean_build.sh RELEASE_PACKAGE PROJECT_DIRECTORY EXPECTED_VERSION` 只接受三个位置参数，只调用所选发布包的 `clean build`。脚本先核对版本、CLI、扩展和 MATIEC，再复制工程到临时目录；临时副本及产物由脚本持有，退出时删除。源工程归调用者所有，脚本不会写回。该命令运行在主机普通进程，不在实时路径中使用，不提供线程并发保证。参数或工具链不完整返回 2；Clean Build 失败时透传非零退出；成功时输出两个生成文件的 SHA-256。
 
 `scripts/verify_basic17_ld.sh RELEASE_PACKAGE LD_PROJECT EXPECTED_VERSION` 先核对包版本和所需脚本，随后用包内工具在测试夹具自己的临时目录对指定 LD 工程及包内 ST 对照工程各执行两次 Clean Build 与主机虚轴扫描。输入工程归调用者，夹具持有并清理副本及产物；脚本不连接设备，不在实时线程运行，也不保证多进程并发。参数/包不完整返回 2；夹具失败透传非零退出；成功输出 ST/LD 哈希与 PASS。对修改后的 LD 图形，成功判据仅适用于实际传入的工程内容。
+
+`scripts/open_mapping_offline.sh RELEASE_PACKAGE MAPPING_PROJECT EXPECTED_VERSION` 核对版本、项目和包内映射依赖，补齐 V0.0.17 启动器遗漏的设备目录 Python 路径及校验库路径，然后以 `IC_SKIP_ERPC_TUNNEL=1` 执行包内 `Beremiz.py`。输入工程归调用者，IDE 只在用户主动保存时写工程；脚本本身不复制或改写工程，不连接 Runtime，不在实时线程使用。参数、版本、DISPLAY 或依赖错误返回 2；正常启动后由 GUI 进程决定最终退出码。脚本是 V0.0.17 限定的离线映射页替代入口，不取代发布包的正式启动器门禁。

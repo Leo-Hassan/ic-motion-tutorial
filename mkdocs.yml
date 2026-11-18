@@ -44,6 +44,7 @@ nav:
       - 02 ST 功能块与命令交接: v0.0.17/cases/02-st-command-handoff.md
       - 04 LD 编辑与仿真: v0.0.17/cases/04-ld-edit-simulate.md
       - 05 轴配置和限位: v0.0.17/cases/05-axis-limits.md
+      - 06 设备映射与 CiA 402: v0.0.17/cases/06-device-mapping-cia402.md
   - V0.0.14 手册:
       - 手册首页: v0.0.14/index.md
       - 版本与证据: v0.0.14/versions.md

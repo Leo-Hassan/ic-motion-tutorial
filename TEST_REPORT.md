@@ -2,6 +2,29 @@
 
 # 测试报告
 
+## 阶段三丁：设备映射与 CiA 402（2026-11-18）
+
+两工程均从 V0.0.17 锁定的 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 只复制 Git 跟踪文件。模拟设备目录含 1 台 `Simulated-IO` 与 4 个预置通道；CiA 402 工程的 CSP、缩放和行程为上游离线占位值。没有设备扫描、板端连接或参数写入。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 映射工程包内 Clean Build | PASS；SO SHA-256 `e43ec09b46158754af6f3158ad99a87ff8546587b9d024a9d1bf13ee2d380603`，变量表 `3b7fcd0f6c7f64522261d3326c0263b3f6bc0520c3ae72e72ac2c59f9e61e237`；真实 IDE `F11` Build PASS |
+| CiA 402 工程包内 Clean Build | PASS；SO SHA-256 `fcd539f319107916186b9e6fc267a76a10b688291099b959f4c829a52be7cec5`，变量表 `dbf04d33b449df0b82230966a644b0bd4f6290b53a32b0add1655b16ad8d9900`；真实 IDE `F11` Build PASS，GUI 临时副本提示 unsaved project changes |
+| 映射离线夹具 | 源码仓库 `MAP_P01C_GENERATED_CYCLE`、`MAP_P01D_WORKFLOW`、`MAP_P01D_BEREMIZ_CLEAN_BUILD` 3/3 PASS；后者完成保存工程模拟过程映像验证。该夹具使用同提交上游工程，教程副本另做包内 Clean Build |
+| 映射 GUI 正式入口 | **FAIL**：V0.0.17 正式启动器的 Python 路径缺 `ic-device-library/python`，打开 Mapping 编辑页真实报 `No module named ic_device_catalog`；已有包内软件门禁不覆盖该路径 |
+| 教程临时离线入口 | `scripts/open_mapping_offline.sh` 对期望 V0.0.18 返回 2 并说明不匹配；对 V0.0.17 打开教程工程，真实 Mapping 页显示 4 行及 `Offline editing`，进程路径仍指向 V0.0.17 包内 `Beremiz.py`，无 Runtime 隧道 |
+| CiA 402 仿真与板端 | SKIP：虚轴仿真入口不支持 `Cia402RealAxis`；无当轮实机授权，硬件操作 0 |
+
+第一次在工作区源码 CTest 的现有缓存上运行映射测试时，共 3 项中生成周期 1 PASS、工作流与保存工程测试 2 FAIL，原因是缓存引用的 `build/ic-device-library/libic_mapping_validator.so` 尚未构建。先在相同源码树构建 `ic_mapping_validator`，再复跑 3/3 PASS；原始失败保留，不能称第一次全通过。另一次从源码根执行旧版 CTest 的 `--test-dir build` 输出 `No tests were found`；改在实际 `build/` 工作目录执行。正式启动器映射页路径缺陷仍未修复，不以临时入口 PASS 覆盖。
+
+CiA 402 工程复制后仅清理上游 README 首行两个 Markdown 尾部空格；对最终教程副本再做包内 Clean Build，SO 与变量表 SHA-256 均与上表初次结果一致。工程 XML、ST 和实轴占位参数没有改动。
+
+本阶段新增 6 张真实 V0.0.17 包内 IDE 截图，工程树、编辑位置、离线状态及构建结果与正文对应，SHA-256 见图片来源表。网站、浏览器和公开发布的整体验收在后续阶段进行。
+
+本站 `mkdocs build --strict` 返回 0，13 个 HTML 页面、335 条站内页面或资源链接缺失 0，搜索索引 48 条且含 CiA 402 正文。首轮截图摘要对照发现 `cia402-build-result.png` 的来源表录入多出两个十六进制字符，图片本体未改；修正表项后复核。真实浏览器桌面与手机验收仍待执行。
+
+本阶段暂存 33 个文件的文字敏感模式扫描命中 0，18 张 V0.0.17 PNG 的 SHA-256 均在来源表中逐项匹配；`git diff --cached --check` 无空白错误。生成的 `site/`、本地测试日志和包内构建目录未纳入提交。
+
 ## 阶段三丙：轴配置和限位（2026-11-18）
 
 案例 05 复用案例 01 的完全相同 `FirstVirtualAxis` 源码与 V0.0.17 包内实测，不创建第二份工程或把同一次运行计为新增独立验证。配置文件核对值为位置 -100..100、速度/加减速度上限 100、周期 0.001 s；`plc.xml` 中 `config/resource1/MotionTask` 为 `T#1ms`，`MAIN` 的目标 3、速度 1 均在所示配置范围内。阶段三甲已记录该工程 Clean Build 的 SO 与变量表哈希及真实 GUI 仿真的 3056 周期、X=3、ErrorID=0、硬件操作 0。本章没有执行越界故障注入或实机限位测试，均记 SKIP。

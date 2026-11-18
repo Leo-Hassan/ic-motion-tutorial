@@ -1,8 +1,8 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：12 张图片均从 V0.0.17 包内真实 wx 窗口直接截取，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：18 张图片均从 V0.0.17 包内真实 wx 窗口直接截取，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
-2026-11-18 在本机 `DISPLAY=:0` 启动 `ic-platform-V0.0.17-linux-amd64`；启动前包内 `bin/ic-platform --version` 返回 `Industrial Control Platform V0.0.17`。`ps` 回查启动器和 `Beremiz.py` 路径均指向该包。`IC_SKIP_ERPC_TUNNEL=1`，窗口状态栏始终为离线。项目编辑截图从同一包内 `Beremiz.py` 打开教程工程的临时副本；通过真实 XTEST 鼠标和键盘输入展开树、打开编辑页并触发 `Ctrl+Alt+M`。用 wx `ScreenDC` 直接读取屏幕上 IDE 窗口区域为 PNG，未后期绘制、合成或 AI 生成 UI。
+2026-11-18 在本机 `DISPLAY=:0` 启动 `ic-platform-V0.0.17-linux-amd64`；启动前包内 `bin/ic-platform --version` 返回 `Industrial Control Platform V0.0.17`。`ps` 回查启动器和 `Beremiz.py` 路径均指向该包。`IC_SKIP_ERPC_TUNNEL=1`，窗口状态栏始终为离线。项目编辑截图从同一包内 `Beremiz.py` 打开教程工程的临时副本；通过真实 XTEST 鼠标和键盘输入展开树、打开编辑页并触发 `Ctrl+Alt+M`。映射页因 V0.0.17 启动器缺模块路径，使用本仓库 `open_mapping_offline.sh` 等价的包内路径补全环境打开真实 IDE；未使用模拟界面。用 wx `ScreenDC` 直接读取屏幕上 IDE 窗口区域为 PNG，未绘制、合成或 AI 生成 UI；`ld-build-recursion-error.png` 仅从同次全屏截图裁剪窗口区域。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -18,5 +18,11 @@
 | `ld-edit-contact.png` | 双击触点 97，打开真实 Edit Contact Values 对话框 | `73a48102dd4e7a10d04d665f221caf19ff268c3c794cd12e3456aa1af8b9e565` |
 | `ld-edited-negated-contact.png` | 在独立临时副本中将触点改为 Negated 并保存；该副本 Build FAIL | `2fe084a0cf1753a1763299065c7c29b27400197238ed8bf659483bf6e61dcc62` |
 | `ld-build-recursion-error.png` | 同一副本按 F11 后真实 wx 错误对话框，显示 RecursionError；从全屏实拍中裁剪 | `8f9cf1783c00299143f9abf7b6d8e9ed1fcaafb6c74bfde36ecfb9eb4723094d` |
+| `mapping-editor.png` | 打开模拟 Mapping 节点，显示四通道、来源、变量及 OFFLINE 状态 | `0104428d5c218174053976d8d01494e667bd6c1bde5ee0e6404be0623eb4079e` |
+| `mapping-build-result.png` | 同映射工程按 F11，Console 显示 Build 成功 | `034d1276f5b5257dcd885c328bd723266dea8eb5336edff90f57d792ae1b8a43` |
+| `cia402-commissioning.png` | 打开离线 Cia402RealAxis 节点，显示 OFFLINE 质量和示例范围 | `7450b1f4f1e9bb2e0e5afc1d5381477935e7598b264bd0991e2d0525576aeb3b` |
+| `cia402-config.png` | 同一轴 Config 页的 CSP、CountsPerUnit 和位置/速度字段 | `609d9f2decc6e3cdf1311ec7952a9fed263a30af02fddebca2fd9b9d3af48e7d` |
+| `cia402-st-editor.png` | 打开实轴示例 ST MAIN，显示五个功能块调用和工程树 | `a78f7d498e216fe6aea2d53f9a54df30a5e58116d4fcbcfe77db241fd53d9b36` |
+| `cia402-build-result.png` | 同实轴工程按 F11，Console 显示 Build 成功和未保存提示 | `16dde471a4e4c91aaebe75c242a05822540b34b4dbd6f87f12d25dd2e710d053` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。
