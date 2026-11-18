@@ -31,6 +31,9 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
+      extend_pygments_lang:
+        - name: iecst
+          lang: pascal
 extra_css:
   - assets/stylesheets/extra.css
 nav:

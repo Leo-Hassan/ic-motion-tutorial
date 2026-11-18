@@ -1,4 +1,4 @@
-用途：说明中文教程仓库的构建、目录和交付进度。当前状态：改版 IDE V0.0.17 本地候选案例 01～13 已覆盖计划主题；LD 与映射页启动限制已记录，浏览器验收和公开发布待续。
+用途：说明中文教程仓库的构建、目录和交付进度。当前状态：改版 IDE V0.0.17 本地候选案例 01～13、真实浏览器与静态站点验收已完成；LD 编辑缺陷与映射页启动限制已记录，公开发布待续。
 
 # 大桥 IDE / IC Motion 中文教程
 
@@ -10,6 +10,7 @@
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/mkdocs build --strict
+python3 scripts/verify_site.py
 .venv/bin/mkdocs serve
 ```
 
@@ -32,5 +33,7 @@ python3 -m venv .venv
 - `scripts/clean_build_is620n_offline.sh`、`open_is620n_offline.sh`：使用调用者提供的 AArch64 IgH SDK 和交叉工具链，在临时副本做离线构建或打开真实 IDE；不接设备。
 - `scripts/open_mapping_offline.sh`：V0.0.17 映射页临时离线入口，核对包版本并补齐包内设备目录模块路径；不建立 Runtime 隧道。
 - `TEST_REPORT.md`：逐阶段测试、失败和跳过记录。
+- `scripts/verify_site.py`：核对页面、站内链接和锚点、搜索内容、ST 高亮以及 44 张真实截图摘要。
+- `.github/workflows/pages.yml`：主分支变更后严格构建、执行站点核对并自动部署 GitHub Pages。
 
 本仓库不包含 EtherCAT 主站、密钥、板端配置、构建缓存或历史 `test-results`。教程不会触发板端 Stop、Transfer、Run、Force、SDO 写入或电机运动。

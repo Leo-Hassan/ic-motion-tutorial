@@ -1,4 +1,4 @@
-用途：记录教程网站采用的开源组件与结构参考。当前状态：站点选型完成，V0.0.17 工程保留 MIT 或 GPL 原始来源。
+用途：记录教程网站采用的开源组件与结构参考。当前状态：V0.0.17 工程保留 MIT 或 GPL 原始来源；GitHub Pages 工作流仅调用上游 Actions。
 
 # 第三方组件与参考
 
@@ -6,9 +6,10 @@
 | --- | --- | --- |
 | MkDocs 1.6.1 | 从 Markdown 构建静态站点 | [官方文档](https://www.mkdocs.org/)；按 pip 依赖使用，不复制源码 |
 | Material for MkDocs 9.5.49 | 搜索、导航、代码块与响应式主题 | [官方文档](https://squidfunk.github.io/mkdocs-material/)；按 pip 依赖使用，不复制源码 |
+| GitHub Pages Actions | 自动构建后上传并部署静态产物 | [GitHub 官方工作流说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)；调用 `checkout`、`setup-python`、`upload-pages-artifact` 与 `deploy-pages` 的上游版本，不复制源码 |
 | 野火教程网站 | “入口 → 手册 → 章节”阅读结构参考 | [野火产品资料入口](https://doc.embedfire.com/products/link/zh/latest/)及[章节示例](https://doc.embedfire.com/module/module_tutorial/zh/latest/)；未复制文字、图片或代码 |
 
-后续若复制工作区示例源码，会逐工程记录原仓库、提交、路径、许可证和改动；不复制 `test-results`、`build`、密钥或内部配置。
+每份工作区示例源码均在相邻来源文件记录原仓库、提交、路径、许可证和改动；不复制 `test-results`、`build`、密钥或内部配置。
 
 阶段二已从 `ic-beremiz-motion` 提交 `29ca588ca3e1190acf751e9e3353a30d5222f44d` 复制 `examples/beremiz_virtual_axis/` 至 `examples/v0.0.14/virtual_axis/`。上游版权为 2026 Industrial Control Platform contributors，SPDX 为 MIT，完整许可证随示例保留。原路径、改动和未来替换边界见示例内 `SOURCE.md`；未复制上游 `build/`。
 
