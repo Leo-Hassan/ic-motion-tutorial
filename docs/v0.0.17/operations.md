@@ -41,3 +41,5 @@
 结果文件在本地工程副本 `build/motion-preview-result.json`，应检查 `done=1`、`error=0`、`hardware_operations=0`。`build/` 是生成物，不属于教程仓库。若结果框报告参数或构建错误，回到 ST、轴参数和底部 Console 核对具体错误位置；不要用 Force 绕过故障。
 
 ST 断点/单步与生产在线只读监视的边界将在独立案例中逐项演示；本页的批量离线仿真不具备断点与单步能力。
+
+已发现 V0.0.17 的特定 LD 编辑失败：在 Basic 17 LD 临时副本中把 `Enable` 触点从 Normal 改为 Negated 后，图形编辑器保存出回环连线，随后 `F11` 抛 `RecursionError`。详见[案例 04](cases/04-ld-edit-simulate.md)；原工程的 Build 和保存工程仿真结果不覆盖该失败。

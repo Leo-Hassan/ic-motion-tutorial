@@ -1,4 +1,4 @@
-用途：说明中文教程仓库的构建、目录和交付进度。当前状态：改版 IDE V0.0.17 本地候选的首个案例、真实截图和离线验证已完成；其余案例与公开发布待续。
+用途：说明中文教程仓库的构建、目录和交付进度。当前状态：改版 IDE V0.0.17 本地候选案例 01、02、04 已实测；LD 触点取反路径存在已记录的构建失败，其余案例与公开发布待续。
 
 # 大桥 IDE / IC Motion 中文教程
 
@@ -23,6 +23,7 @@ python3 -m venv .venv
 - `examples/v0.0.17/FirstVirtualAxis/`：在 V0.0.17 包内重建和仿真的虚轴工程。
 - `examples/v0.0.14/`：V0.0.14 虚轴工程底座；其余案例工程后续逐项纳入。
 - `scripts/clean_build.sh`：用选定发布包的包内 CLI 在临时副本离线 Clean Build。
+- `scripts/verify_basic17_ld.sh`：用选定发布包对实际 LD 工程执行两次 Clean Build 与保存工程虚轴扫描；会同时运行包内 ST 对照工程。
 - `TEST_REPORT.md`：逐阶段测试、失败和跳过记录。
 
 本仓库不包含 EtherCAT 主站、密钥、板端配置、构建缓存或历史 `test-results`。教程不会触发板端 Stop、Transfer、Run、Force、SDO 写入或电机运动。

@@ -41,6 +41,8 @@ nav:
       - 截图来源: assets/images/v0.0.17/PROVENANCE.md
       - 软件操作: v0.0.17/operations.md
       - 01 虚轴首次运动: v0.0.17/cases/01-first-virtual-axis.md
+      - 02 ST 功能块与命令交接: v0.0.17/cases/02-st-command-handoff.md
+      - 04 LD 编辑与仿真: v0.0.17/cases/04-ld-edit-simulate.md
   - V0.0.14 手册:
       - 手册首页: v0.0.14/index.md
       - 版本与证据: v0.0.14/versions.md

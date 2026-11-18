@@ -1,6 +1,27 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 改版 UI 首章和软件操作截图已完成，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01、02、04 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三乙：ST 命令交接与真实 LD 工程（2026-11-18）
+
+本阶段使用同一个 V0.0.17 本地候选包，版本回查与包源码身份见阶段三甲。两个复制工程均来自 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4`；只复制跟踪的源码和配置，`build/` 与历史测试物没有进入教程。包内 IDE 以 `IC_SKIP_ERPC_TUNNEL=1` 在真实桌面打开临时副本，窗口显示 `Online:OFFLINE`。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| ST 工程 Clean Build | `beremiz_virtual_axis` 使用 V0.0.17 包内 CLI 成功；SO SHA-256 `8d0b2419f4bacbfaadf5c7f5e2eee59316f5836d367d9e1cc690e0af07348328`，变量表 `4c0baaeb12a959a0a65b1a9c54d9cd82f013396d6d6d27d9f9e4984a24df1f13`；真实 IDE `F11` Build 成功 |
+| ST 交接夹具 | 同提交 `Test_LookAhead.st` 的 `V10_ST_LookAhead` CTest 1/1 PASS：2753 周期、排队 3、交接 3、终点 5.06；与案例工程的 100..101.5 目标不同，案例自身自动 GUI 仿真 SKIP |
+| 原始 LD 工程 Clean Build | `beremiz_basic_17_ld` 使用 V0.0.17 包内 CLI 成功；SO SHA-256 `0459f68979803641e453a5d30a2fdddfac5c04eb4c7b5f181ab8a82d00a4a7ec`，变量表 `9062acdcd8599bdbc73f6d039abf1f3cf3f55e9788d81e37f385fb1ec54edbe9`；真实 IDE `F11` Build 成功 |
+| 保存工程 LD 仿真 | 公开 `scripts/verify_basic17_ld.sh` 调包内 `test_beremiz_basic17_build.py`，对教程 LD 和包内 ST 对照工程各两次 Clean Build，哈希相等，确认 17 类块/18 实例并执行主机虚轴扫描；复跑 1/1 PASS，202.530 秒；LD 的 SO/变量表哈希与上行一致 |
+| LD 编辑缺陷 | 在独立临时副本中真实双击 `Enable` 触点，Normal 改 Negated 并保存，`F11` 触发 `RecursionError`，**FAIL**。保存的 `plc.xml` 中触点 97 错误反向引用线圈 98，形成回环；原始工程 PASS 不能覆盖这一失败 |
+| 真实截图 | 本阶段新增 ST 2 张、LD 6 张，包括取反编辑和实际错误对话框；V0.0.17 包内进程、步骤和 SHA-256 见 `PROVENANCE.md`；没有绘制或生成 IDE UI |
+| MkDocs 严格构建与静态链接 | `PYTHONPATH=.deps python3 -m mkdocs build --strict` 返回 0；11 个生成 HTML 页、254 条本地页面或资源链接缺失 0；搜索索引 39 条，含 ST 和 LD 正文。真实浏览器验收仍待后续阶段 |
+| 板端与实机 | SKIP：无当轮单独授权，硬件操作 0 |
+
+第一次直接调用保存工程测试缺少包内 MatIEC `bin` 的 `PATH`，运行失败；补齐包内路径后 1/1 PASS。源码仓库现有 CMake 缓存最初没有 MatIEC，`V10_ST_LookAhead` 报 SKIP；重新配置 `IC_MATIEC_EXECUTABLE` 后 1/1 PASS。V0.0.17 包裁掉 CTest 原始夹具源码，不能在包目录直接重新配置此项，实际 PASS 使用锁定提交的工作区 `ic-beremiz-motion` 源码和包内 MatIEC。随后在 CMake 当前目录误用 `-S .` 返回配置错误，改为源码根路径后才成功。这些初次失败和 SKIP 不计为通过。
+
+LD 编辑缺陷已在 V0.0.17 发布源码仓库 README、CHANGELOG 与 TEST_REPORT 追记；尚未修复、没有移动标签或重打归档。**案例 04 的“LD 编辑后可构建”要求仍未满足。**
+
+本阶段暂存 42 个文件的文字敏感模式扫描命中 0，图片摘要与来源表逐项一致。新增约 2651 行中，原样复制的 PLCopen LD `plc.xml` 占 2090 行；超过通常的 2000 行阶段原则是为保留可打开、可构建的真实 LD 工程，未扩展产品源码功能。
 
 ## 阶段三甲：V0.0.17 改版 UI 与案例 01（2026-11-18）
 

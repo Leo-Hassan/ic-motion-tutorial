@@ -1,4 +1,4 @@
-用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：V0.0.17 首次虚轴运动章节、真实截图和离线仿真完成；其余主题待逐项验收。
+用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：V0.0.17 案例 01、02、04 已写；LD 原工程通过，取反编辑路径失败，其余主题待逐项验收。
 
 # 案例覆盖计划
 
@@ -7,9 +7,9 @@
 | 编号 | 主题 | 候选工程目录 | 关键 POU / 资源 | 当前状态 |
 | --- | --- | --- | --- | --- |
 | 01 | 虚轴首次运动 | 教程专用 `examples/v0.0.17/FirstVirtualAxis/`，沿用 V0.0.14 生成工程并用 V0.0.17 包复验 | `plc.xml/MAIN`；`AxisX@VirtualAxis/confnode.xml` | V0.0.17 Clean Build、真实 GUI 仿真、正文与截图 PASS；实机 SKIP |
-| 02 | ST 功能块调用与命令交接 | `ic-beremiz-motion/examples/beremiz_virtual_axis/` | `plc.xml/MAIN` 中 `MoveAbsA/B/C/D` | 待验证 |
+| 02 | ST 功能块调用与命令交接 | `examples/v0.0.17/beremiz_virtual_axis/` | `plc.xml/MAIN` 中 `MoveAbsA/B/C/D` | 包内 Clean Build 与 IDE Build PASS；同源码 LookAhead 仿真 PASS；本例自动 GUI 仿真 SKIP |
 | 03 | ST 断点与单步 | `beremiz/tests/projects/st_current_value/` | `plc.xml/MAIN`；`Config0/Res0/MainTask` | 待验证 |
-| 04 | 梯形图编辑与仿真 | `ic-beremiz-motion/examples/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 待验证 |
+| 04 | 梯形图编辑与仿真 | `examples/v0.0.17/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 原工程 Clean Build、真实 IDE Build、保存工程仿真 PASS；触点取反后 Build FAIL（V0.0.17 已知问题） |
 | 05 | 轴配置与限位 | `ic-beremiz-motion/examples/beremiz_v12_basic/` | 虚轴配置节点与 `plc.xml/MAIN` | 待验证 |
 | 06 | 设备映射与 CiA 402 | `ic-beremiz-motion/examples/beremiz_device_mapping/` 和 `beremiz_cia402_axis/` | `device-catalog.json`；`Axis_1@Cia402RealAxis/confnode.xml` | 待验证 |
 | 07 | IS620N 实轴工程离线配置与构建 | `IGH_RK_1.6-master/beremiz_projects/is620n_cia402_dual_circle_online/` | `plc.xml/DualCirclePanel`；双轴配置与 C 扩展 | 只做离线，待敏感信息审查与 Clean Build |
