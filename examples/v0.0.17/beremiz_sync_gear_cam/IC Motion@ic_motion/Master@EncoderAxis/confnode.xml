@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<EncoderAxis xmlns:xsd="http://www.w3.org/2001/XMLSchema" AxisName="Deterministic Master" GlobalName="Master" EncoderKind="Absolute" CountsPerRevolution="100" EngineeringUnit="unit" UnitsPerRevolution="1" GearRatio="1" ZeroOffset="0" ModuloPeriod="0" ContinuousUnwrap="true" MaximumAgeCycles="1" MinimumPosition="-100" MaximumPosition="100" MaximumVelocity="1000" SourceMode="Simulation" SimulationInitialCount="0" SimulationIncrementCounts="1"/>

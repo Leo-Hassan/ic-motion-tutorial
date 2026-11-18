@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CamTable xmlns:xsd="http://www.w3.org/2001/XMLSchema" TableName="Negative triangular cam" GlobalName="Cam_B" Points="0:0;0.5:-0.5;1:0"/>

@@ -1,6 +1,21 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～07 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～09 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三庚：电子齿轮、相位与电子凸轮（2026-11-18）
+
+同一工程来自 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_sync_gear_cam/`，15 个跟踪文件原样复制到教程 `examples/v0.0.17/beremiz_sync_gear_cam/`。案例 08/09 共用它和同一组构建、仿真证据；没有重复计数。源码包含模拟 EncoderAxis 主轴、VirtualAxis 从轴、两张三点 CamTable 和同步配置，未导入 `build/`、`test-results/`、密钥或现场配置。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| V0.0.17 包内保存工程测试 | `scripts/verify_sync_gear_cam.sh` 返回 0，2/2 PASS，耗时 130.460 秒；控制器生成/保存/重开/另存/备份/恢复 PASS；两次 Clean Build 摘要完全一致，保存工程 C 仿真输出 `GearIn/Out GearInPos Phasing absolute/relative CamSwitch/CamOut PASS` |
+| 独立 CLI Clean Build | `scripts/clean_build.sh` 对教程工程临时副本返回 0；SO SHA-256 `e416dbd9aee8aae7f9568970f697301c89d96cbe74eedcbeca1afb4619f5b9bd`，变量表 `adfebaf2a5ee9129c777d96d7875594e37f957b867d291aced09f4f8f591b97c`；与前项两次 Build 相同，工程身份 `g2 7632eb6860ab` |
+| 真实 IDE GUI Build | V0.0.17 包内 `Beremiz.py` 在全新进程打开未编辑临时副本，等待加载后点击 Build，Console `Successfully built.`；SO/变量表完整 SHA-256 与 CLI **逐字节一致**。GUI 截图同屏显示工程树、`MAIN` 与 Console，状态 `Online:OFFLINE` |
+| 首次 GUI 异常 | 首个 GUI 进程在打开 `MAIN` 后约 0.2 秒按 F11，真实报 `wxYield called recursively`，调用链 `BeremizIDE.py OnMethod → ProjectController._Build → LogPseudoFile._should_write → app.Yield()`。该次 GUI Build **FAIL**；关闭对话框后同进程再按 F11/点工具栏未得到新结果。重启后不先打开编辑器、等待工程加载，GUI Build PASS。缺陷没有修改包源码、没有移动版本标签 |
+| 真实截图 | 新增 Gear ST、同步资源、Cam_A、Cam_B、Cam ST 与 GUI 成功控制台六图，均来自真实 V0.0.17 包内 wx 窗口，SHA-256 见 `PROVENANCE.md`；首次异常截图只留在本地临时测试目录，不纳入教程公开页面 |
+| 仿真与硬件 | C 夹具从本工程生成的共享库进行本机离线软件仿真；没有生产 Runtime 连接、PDO、板端 Stop/Transfer/Run、Force、SDO 写入或电机运动。实轴同步和机械安全验收 SKIP |
+
+`test_v15_beremiz_sync_project.py` 名称中的 `v15` 指该测试最初开发阶段；本阶段实际从 V0.0.17 包运行并核对包版本，不能把脚本名写成 IDE V0.0.15 验收。测试日志还出现两条上游 Python `ResourceWarning: unclosed file`，没有使测试失败。15 个工程文件与锁定源提交逐字节相同；`sh -n scripts/verify_sync_gear_cam.sh` 与 `git diff --check` 均 PASS。`PYTHONPATH=.deps python3 -m mkdocs build --strict` 返回 0，站点 17 个 HTML 页、搜索索引 68 条，扫描 522 条站内页面/资源链接缺失 0；34 张 V0.0.17 PNG 与来源表 SHA-256 全部匹配。新增工程/案例/脚本扫描未发现本机绝对路径、私钥头、口令赋值或私有网段地址。全站真实浏览器桌面/手机验收及公开发布仍待后续阶段。
 
 ## 阶段三己：IS620N 双实轴离线工程（2026-11-18）
 

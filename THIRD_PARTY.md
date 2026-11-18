@@ -23,3 +23,5 @@
 阶段三戊从 V0.0.17 锁定 `beremiz` 提交 `06f5b1e0e45faecac96d790ab03e57be46d4fd2d` 的 `tests/projects/st_current_value/` 原样复制 3 个工程文件，GPL-2.0-or-later 许可证全文见 `examples/v0.0.17/LICENSE.beremiz-ide`。同目录另写的 `maintenance_debug.st` 为对应三条通用 ST 赋值的最小编译输入，文件头 SPDX MIT；调试工具来自 `ic-matiec-adapter` 提交 `01e4b4897b6d7a002d26169314687e8154f29c5c`，仅调用其脚本与本机库，没有复制上游源码或候选二进制。原路径、修改范围及未来版本边界见相邻来源说明。
 
 阶段三己从 `IGH_RK_1.6-master` 提交 `e6308f19cafe6c591e2dea0c8ba92b0349b746be` 的 `beremiz_projects/is620n_cia402_dual_circle_online/` 复制 11 个跟踪工程文件。`dual_circle_panel.st` 上游文件头为 SPDX MIT；其余 XML 无逐文件 SPDX 声明，本站不擅自给上游增加许可证。两个配置 XML 的本机路径被替换为教学参数，改动与未来替换边界见相邻 `is620n_dual_circle_offline.SOURCE.md`。IgH AArch64 SDK、交叉工具链和包内 EtherCAT 适配源码在调用者环境提供，未复制到教程；不发布主站实现、驱动库、现场凭据或历史硬件报告。
+
+阶段三庚从 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_sync_gear_cam/` 原样复制 15 个跟踪工程文件至本站 `examples/v0.0.17/beremiz_sync_gear_cam/`，包括原清单；上游版权为 2026 Industrial Control Platform contributors，SPDX MIT，完整许可证沿用同级 `LICENSE.ic-beremiz-motion`。相邻 `beremiz_sync_gear_cam.SOURCE.md` 记录原路径、修改范围和未来版本需重新验证的边界。V0.0.17 包内测试源码只在本机调用，没有复制到本站。

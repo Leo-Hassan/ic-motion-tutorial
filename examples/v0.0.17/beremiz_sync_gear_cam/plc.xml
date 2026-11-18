@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6.xsd">
+  <fileHeader companyName="Industrial Control Platform" productName="IC Motion Synchronization Example" productVersion="15.1.0" creationDateTime="2026-09-28T23:16:26"/>
+  <contentHeader name="IC Motion Gear Cam Phasing" version="15.1.0" modificationDateTime="2026-09-28T23:16:26">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="8" y="8"/>
+      </fbd>
+      <ld>
+        <scaling x="8" y="8"/>
+      </ld>
+      <sfc>
+        <scaling x="8" y="8"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <externalVars>
+            <variable name="Master">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="Slave">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="Cam_A">
+              <type>
+                <derived name="CAM_REF"/>
+              </type>
+            </variable>
+            <variable name="Cam_B">
+              <type>
+                <derived name="CAM_REF"/>
+              </type>
+            </variable>
+          </externalVars>
+          <localVars>
+            <variable name="PowerSlave">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="GearIn">
+              <type>
+                <derived name="MC_GearIn"/>
+              </type>
+            </variable>
+            <variable name="GearOut">
+              <type>
+                <derived name="MC_GearOut"/>
+              </type>
+            </variable>
+            <variable name="GearInPos">
+              <type>
+                <derived name="MC_GearInPos"/>
+              </type>
+            </variable>
+            <variable name="PhaseAbsolute">
+              <type>
+                <derived name="MC_Phasing"/>
+              </type>
+            </variable>
+            <variable name="PhaseRelative">
+              <type>
+                <derived name="MC_Phasing"/>
+              </type>
+            </variable>
+            <variable name="SelectA">
+              <type>
+                <derived name="MC_CamTableSelect"/>
+              </type>
+            </variable>
+            <variable name="SelectB">
+              <type>
+                <derived name="MC_CamTableSelect"/>
+              </type>
+            </variable>
+            <variable name="CamIn">
+              <type>
+                <derived name="MC_CamIn"/>
+              </type>
+            </variable>
+            <variable name="CamOut">
+              <type>
+                <derived name="MC_CamOut"/>
+              </type>
+            </variable>
+            <variable name="ActiveCamTable">
+              <type>
+                <derived name="CAM_REF"/>
+              </type>
+            </variable>
+            <variable name="Enable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="GearInRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="GearOutRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="GearInPosRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="PhaseAbsoluteRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="PhaseRelativeRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="SelectARequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="SelectBRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="CamInRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="CamOutRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseCamB">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p><![CDATA[PowerSlave(Axis := Slave, Enable := Enable);
+GearIn(Master := Master, Slave := Slave, Execute := GearInRequest,
+       RatioNumerator := 2.0, RatioDenominator := 1.0,
+       Acceleration := 0.0, Deceleration := 0.0, Jerk := 0.0,
+       BufferMode := 0);
+GearInPos(Master := Master, Slave := Slave, Execute := GearInPosRequest,
+          RatioNumerator := 1.0, RatioDenominator := 1.0,
+          MasterSyncPosition := 2.0, SlaveSyncPosition := 2.0,
+          MasterStartDistance := 0.8, MaximumSyncError := 0.0);
+PhaseAbsolute(Master := Master, Slave := Slave,
+              Execute := PhaseAbsoluteRequest, PhaseShift := 0.1,
+              Relative := FALSE, Velocity := 1.0);
+PhaseRelative(Master := Master, Slave := Slave,
+              Execute := PhaseRelativeRequest, PhaseShift := -0.05,
+              Relative := TRUE, Velocity := 1.0);
+GearOut(Slave := Slave, Execute := GearOutRequest);
+
+SelectA(Master := Master, Slave := Slave, CamTable := Cam_A,
+        Execute := SelectARequest, Periodic := TRUE,
+        MasterAbsolute := TRUE, SlaveAbsolute := TRUE);
+SelectB(Master := Master, Slave := Slave, CamTable := Cam_B,
+        Execute := SelectBRequest, Periodic := TRUE,
+        MasterAbsolute := TRUE, SlaveAbsolute := TRUE);
+IF UseCamB THEN
+    ActiveCamTable := SelectB.CamTableID;
+ELSE
+    ActiveCamTable := SelectA.CamTableID;
+END_IF;
+CamIn(Master := Master, Slave := Slave, Execute := CamInRequest,
+      MasterOffset := 0.0, SlaveOffset := 0.0,
+      MasterScaling := 1.0, SlaveScaling := 1.0,
+      MasterStartDistance := 0.0, MasterSyncPosition := 0.0,
+      StartMode := 0, CamTableID := ActiveCamTable,
+      Velocity := 0.0, Acceleration := 0.0, Deceleration := 0.0,
+      Jerk := 0.0, BufferMode := 0);
+CamOut(Slave := Slave, Execute := CamOutRequest);
+]]></xhtml:p>
+          </ST>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="config">
+        <resource name="resource1">
+          <task name="MotionTask" priority="0" interval="T#1ms">
+            <pouInstance name="MAIN0" typeName="MAIN"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

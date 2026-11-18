@@ -1,4 +1,4 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：28 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：34 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
@@ -6,7 +6,9 @@
 
 ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizIDE` 创建完整大桥 IDE 窗口，打开教程 ST 工程的临时副本。测试程序在 `127.0.0.1` 启动包内真实 eRPC Runtime，使用本机隔离调试候选，并为无已安装 BootApplication 的回环测试注入与该临时副本 Clean Build 匹配的部署身份。依次调用真实面板的断点、Attach、Step over、Continue、Detach；外部 `gnome-screenshot` 在各 GUI 事件完成后拍全屏并裁剪实际窗口区域。截图中底部 `Disconnected/Online:OFFLINE` 反映没有生产 Runtime 连接；右侧调试状态来自回环服务。临时 SO、map、会话描述和测试日志未加入仓库。
 
-IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临时教学副本；为本地离线交叉构建，在**临时** `confnode.xml` 将 IgH SDK 占位符换为本机 SDK 路径，教程仓库文件仍不含绝对路径。GUI 无 Runtime 连接，未导入原工程的 `psk/`、`build/`、`TEST_REPORT.md` 或历史测试物。外部 `gnome-screenshot` 全屏实拍后只裁剪 IDE 窗口区域。所有 28 张均未绘制、合成或 AI 生成 UI。
+IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临时教学副本；为本地离线交叉构建，在**临时** `confnode.xml` 将 IgH SDK 占位符换为本机 SDK 路径，教程仓库文件仍不含绝对路径。GUI 无 Runtime 连接，未导入原工程的 `psk/`、`build/`、`TEST_REPORT.md` 或历史测试物。外部 `gnome-screenshot` 全屏实拍后只裁剪 IDE 窗口区域。
+
+同步工程六图从同包 `Beremiz.py` 打开 `beremiz_sync_gear_cam` 的临时副本。真实鼠标打开 `MAIN`、Synchronization、Cam_A 和 Cam_B；原始保存工程的 V0.0.17 GUI Build 显示 `Successfully built.`。首次在打开编辑器后立即 F11 遇到 `wxYield called recursively`，重启真实 IDE，等工程加载完成再从未编辑副本执行 Build 成功；该失败列入测试报告。六图均为外部 `gnome-screenshot` 实拍，只裁剪窗口区域；本次截图没有包含首次报错对话框，因为案例使用后续可复现的成功步骤。所有 34 张均未绘制、合成或 AI 生成 UI。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -38,5 +40,11 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 | `is620n-axis-offline.png` | `Axis_1` Commissioning 页显示 OFFLINE 与 ±0.95 转 | `33a08dd0f0587f546b87d0bc7f18b5aa937ed92992be367d607b45707a2e528e` |
 | `is620n-axis-config.png` | `Axis_1` Config 页显示 CSP、counts/转和软件限位 | `4cbc3e0e862cf7069c3ca95466d1b4a9c8abd56d3eb61db45fa948caa5f55f05` |
 | `is620n-build-result.png` | 同副本真实 IDE `F11` 后 Console 显示 `Successfully built.` 和未保存身份提示 | `afa3fad23be283b4bebf7a20a5a1f06de7f98ebc00990e49e92428bd8fd0d324` |
+| `sync-gear-st.png` | 双击同步工程 `MAIN`，查看 GearIn、GearInPos、两个 Phasing、GearOut 和资源树 | `9902d654a00ca06dcd9328d8105bbcbaa98324309556e62a7eea6083ce1e13eb` |
+| `sync-resource.png` | 双击 Synchronization，显示离线预检和资源页 | `bda6a118a857b9bfc8e640dce8d12c16b0437f5be15fb99f8fadc78b090d314a` |
+| `sync-cam-a.png` | 双击 Cam_A，查看三点正三角形表与预览 | `81e498161e301a81306296b7390c76aff41ec033ca61cfcfc3101c7e10e829f7` |
+| `sync-cam-b.png` | 双击 Cam_B，查看三点负三角形表与预览 | `a64bac257df01fe6592850935de4cc1d86b15686669d81fff9512e5f5ff96821` |
+| `sync-cam-st.png` | 回到 `MAIN`，查看 CamTableSelect、ActiveCamTable、CamIn 和 CamOut | `5be50f3e5590e1bccfc7c98099f71f30463c1ebb72ea7ce5dcad21ec99d0971c` |
+| `sync-gui-build-result.png` | 全新 IDE 进程中，未编辑工程 GUI Build 成功；Console、工程树和 `MAIN` 同屏 | `e81ee92de98d372f912728ac18963ea2112a7c1ce42e1e2d9acc83ef246bd06d` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。
