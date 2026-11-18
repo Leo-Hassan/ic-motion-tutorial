@@ -2,6 +2,12 @@
 
 # 变更记录
 
+## 阶段六：LD 编辑后的构建与仿真
+
+- 在 V0.0.17 真实 IDE 的 LD 临时副本中，把 `Enable` 初值显式设为 `FALSE`，保存后 GUI Build 成功；新增同屏展示变量表、触点、线圈、工程树与 Console 的真实截图。
+- 对保存后的编辑副本执行包内夹具，1/1 PASS；两次 Clean Build、17 类块/18 实例与主机虚轴扫描通过，工件哈希与原工程一致。
+- 继续保留触点改为 Negated 后 `RecursionError` 的失败证据；成功的变量表编辑不代表该图形触点改写路径已经修复。
+
 ## 阶段五：公开仓库和 GitHub Pages
 
 - 创建公开仓库 `Leo-Hassan/ic-motion-tutorial`，以 `main` 作为默认分支；GitHub Pages 使用 Actions 工作流和 HTTPS。

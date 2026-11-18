@@ -1,4 +1,4 @@
-用途：把目标主题映射到可打开的工程和验证证据。当前状态：V0.0.17 案例 01～13 已发布；LD 原工程通过，触点取反编辑后构建失败，其余适用的离线测试已执行。
+用途：把目标主题映射到可打开的工程和验证证据。当前状态：V0.0.17 案例 01～13 已发布；LD 变量初值编辑后构建与仿真通过，触点取反编辑后构建失败，其余适用的离线测试已执行。
 
 # 案例覆盖计划
 
@@ -9,7 +9,7 @@
 | 01 | 虚轴首次运动 | 教程专用 `examples/v0.0.17/FirstVirtualAxis/`，沿用 V0.0.14 生成工程并用 V0.0.17 包复验 | `plc.xml/MAIN`；`AxisX@VirtualAxis/confnode.xml` | V0.0.17 Clean Build、真实 GUI 仿真、正文与截图 PASS；实机 SKIP |
 | 02 | ST 功能块调用与命令交接 | `examples/v0.0.17/beremiz_virtual_axis/` | `plc.xml/MAIN` 中 `MoveAbsA/B/C/D` | 包内 Clean Build 与 IDE Build PASS；同源码 LookAhead 仿真 PASS；本例自动 GUI 仿真 SKIP |
 | 03 | ST 断点与单步 | 教程复制 `examples/v0.0.17/st_current_value/`，原路径 `beremiz/tests/projects/st_current_value/` | `plc.xml/MAIN`；`Config0/Res0/MainTask` | 包内 Clean Build、真实 MATIEC/wx/eRPC 主机回环及完整 IDE 窗口演示 PASS；生产监视 SKIP |
-| 04 | 梯形图编辑与仿真 | `examples/v0.0.17/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 原工程 Clean Build、真实 IDE Build、保存工程仿真 PASS；触点取反后 Build FAIL（V0.0.17 已知问题） |
+| 04 | 梯形图编辑与仿真 | `examples/v0.0.17/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 原工程和变量初值编辑副本 Clean Build、真实 IDE Build、保存工程仿真 PASS；触点取反后 Build FAIL（V0.0.17 已知问题） |
 | 05 | 轴配置与限位 | 与 01 共用 `examples/v0.0.17/FirstVirtualAxis/` | `AxisX@VirtualAxis/confnode.xml` 与 `plc.xml/MAIN` | 配置读取、同工程 Clean Build 和范围内虚轴仿真 PASS；越界故障注入 SKIP |
 | 06 | 设备映射与 CiA 402 | `examples/v0.0.17/beremiz_device_mapping/` 与 `beremiz_cia402_axis/` | `device-catalog.json`；`Axis_1@Cia402RealAxis/confnode.xml` | 两工程 Clean Build/GUI Build PASS，模拟映射夹具 3/3 PASS；实轴仿真和实机 SKIP；映射页须补启动环境 |
 | 07 | IS620N 实轴工程离线配置与构建 | 教程脱敏 `examples/v0.0.17/is620n_dual_circle_offline/`，原路径 `IGH_RK_1.6-master/beremiz_projects/is620n_cia402_dual_circle_online/` | `plc.xml/DualCirclePanel`；双轴配置与 C 扩展 | 静态配置、包内 AArch64 Clean Build、真实 IDE Build PASS；两产物哈希一致，仿真及实机 SKIP |

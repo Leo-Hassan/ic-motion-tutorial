@@ -13,7 +13,7 @@
 | 3 | [01 虚轴首次运动](cases/01-first-virtual-axis.md) | Clean Build 与 GUI 离线仿真 PASS |
 | 4 | [02 ST 功能块与命令交接](cases/02-st-command-handoff.md) | 示例 Clean Build PASS，配套 LookAhead 仿真 PASS |
 | 5 | [03 ST 断点与单步](cases/03-st-breakpoint-step.md) | 工程 Clean Build、主机回环和完整 IDE 断点/单步截图 PASS；生产监视 SKIP |
-| 6 | [04 LD 编辑与仿真](cases/04-ld-edit-simulate.md) | 原工程 Build/仿真 PASS；触点取反后 Build FAIL，见已知问题 |
+| 6 | [04 LD 编辑与仿真](cases/04-ld-edit-simulate.md) | 原工程及变量初值编辑副本 Build/仿真 PASS；触点取反后 Build FAIL，见已知问题 |
 | 7 | [05 轴配置和限位](cases/05-axis-limits.md) | 与 01 共用工程；配置读取、范围内仿真 PASS，越界故障注入 SKIP |
 | 8 | [06 设备映射与 CiA 402](cases/06-device-mapping-cia402.md) | 两工程离线 Build、映射模拟过程映像 PASS；实轴 SKIP，启动器映射页路径缺陷已记录 |
 | 9 | [07 IS620N 双实轴离线构建](cases/07-is620n-offline-build.md) | 脱敏教学副本配置核对、AArch64 Clean Build 与真实 IDE Build PASS；仿真及实机 SKIP |

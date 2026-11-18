@@ -1,4 +1,4 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：44 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：45 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
@@ -12,7 +12,9 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 
 二维路径四图从同包 `Beremiz.py` 打开 `beremiz_coordinated_path` 的未编辑临时副本；先完成 GUI Build，再用真实鼠标打开 `Group_XY`、`MixedPath` 和 `MAIN`。外部 `gnome-screenshot` 拍全屏，只裁剪真实 IDE 窗口区域；图 4 保留同屏的 Build 成功 Console。
 
-工艺切割六图从同包 `Beremiz.py` 打开 `beremiz_process_cutting` 的临时副本；先 GUI Build 成功，再真实点击 Master Commissioning、TrackingRecipe/SawRecipe/KnifeRecipe Config 和 `MAIN`。三张配方页只读取已保存工程值，没有改写或 Apply。外部 `gnome-screenshot` 拍全屏并只裁剪 IDE 窗口；原工程无 Runtime 连接，底栏始终 `Online:OFFLINE`。所有 44 张均未绘制、合成或 AI 生成 UI。
+工艺切割六图从同包 `Beremiz.py` 打开 `beremiz_process_cutting` 的临时副本；先 GUI Build 成功，再真实点击 Master Commissioning、TrackingRecipe/SawRecipe/KnifeRecipe Config 和 `MAIN`。三张配方页只读取已保存工程值，没有改写或 Apply。外部 `gnome-screenshot` 拍全屏并只裁剪 IDE 窗口；原工程无 Runtime 连接，底栏始终 `Online:OFFLINE`。
+
+2026-11-19 又从同一 V0.0.17 包内 `Beremiz.py` 打开 LD 工程全新临时副本，在真实 `MAIN` LD 编辑器的变量表将 `Enable` 初值由空白改为显式 `false`，保存后按 F11。新增 `ld-edited-initial-build.png` 是外部 `gnome-screenshot` 全屏实拍，仅裁剪实际 IDE 窗口；同屏保留编辑值、触点、线圈、工程树、成功 Console 与离线状态。后续对保存副本运行包内夹具 1/1 PASS。所有 45 张均未绘制、合成或 AI 生成 UI。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -25,6 +27,7 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 | `ld-function-block.png` | 双击 `beremiz_basic_17_ld` 的 `MAIN`，真实 LD 编辑器显示功能块 | `d47f695112b463eb49b9b97966f4563d72aeed99cad3b2b27286dcc79f1e081a` |
 | `ld-contact-coil.png` | 在同一 LD 编辑器滚至底部，显示触点、线圈和电源轨 | `fed333eeec1ee6cb4da71b832be4479718010eab3d9d5038b63838ff23bbefbb` |
 | `ld-build-result.png` | 原始 LD 工程在真实 IDE 按 `F11`，Console 显示成功 | `20767218974522f57e171623e0f40a3a80a78b120fd25a2a8baa8fe993546ebd` |
+| `ld-edited-initial-build.png` | LD 临时副本在 `MAIN` 变量表把 Enable 初值显式改为 false 并保存；同屏触点、线圈和 F11 构建成功 | `ec4570aa1d7f24f01bde524b337f7cf7b63c8a311b216f63e1242c10f40607f3` |
 | `ld-edit-contact.png` | 双击触点 97，打开真实 Edit Contact Values 对话框 | `73a48102dd4e7a10d04d665f221caf19ff268c3c794cd12e3456aa1af8b9e565` |
 | `ld-edited-negated-contact.png` | 在独立临时副本中将触点改为 Negated 并保存；该副本 Build FAIL | `2fe084a0cf1753a1763299065c7c29b27400197238ed8bf659483bf6e61dcc62` |
 | `ld-build-recursion-error.png` | 同一副本按 F11 后真实 wx 错误对话框，显示 RecursionError；从全屏实拍中裁剪 | `8f9cf1783c00299143f9abf7b6d8e9ed1fcaafb6c74bfde36ecfb9eb4723094d` |

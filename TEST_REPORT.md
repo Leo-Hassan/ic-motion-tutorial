@@ -1,6 +1,20 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～13、本地验收和公开 GitHub Pages 已有证据；LD 触点取反失败，IDE 安装包未公开发布。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～13、本地验收和公开 GitHub Pages 已有证据；LD 变量初值编辑后构建/仿真通过，触点取反失败，IDE 安装包未公开发布。
 
 # 测试报告
+
+## 阶段六：实际 LD 编辑后的构建与仿真（2026-11-19）
+
+对公开 `beremiz_basic_17_ld/` 建立全新临时副本，在同一 V0.0.17 包内真实 IDE 打开 `MAIN`。变量表将 `Enable : BOOL` 的空白初值改为显式 `false`，按 `Ctrl+S` 后保存的 `plc.xml` 含 `<simpleValue value="false"/>`；触点 97 仍只接左轨 96，线圈 98 只接触点 97。原工程源文件未改；显式 FALSE 与 BOOL 缺省 FALSE 语义相同。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 真实 GUI 编辑与 Build | V0.0.17 包内 `Beremiz.py` 打开临时副本，编辑、保存和 `F11` 后 Console `Successfully built.`；底栏 `Online:OFFLINE`，没有 Runtime 连接 |
+| GUI 工件 | `project.so` SHA-256 `0459f68979803641e453a5d30a2fdddfac5c04eb4c7b5f181ab8a82d00a4a7ec`；`VARIABLES.csv` SHA-256 `9062acdcd8599bdbc73f6d039abf1f3cf3f55e9788d81e37f385fb1ec54edbe9`，与原工程相同 |
+| 编辑副本保存工程测试 | `scripts/verify_basic17_ld.sh` 指向保存后的编辑副本，退出 0；1/1 PASS，282.779 秒。LD 和 ST 对照工程分别两次包内 Clean Build 一致；17 类/18 实例及同工程主机虚轴固定扫描 PASS；LD 摘要与 GUI 相同 |
+| 真实截图 | 新增 `ld-edited-initial-build.png`，从真实 V0.0.17 GUI 外部全屏实拍后仅裁剪窗口；初值、梯级、Console 与工程树同屏；SHA-256 `ec4570aa1d7f24f01bde524b337f7cf7b63c8a311b216f63e1242c10f40607f3` |
+| 图形触点取反 | 先前独立临时副本把触点改为 Negated 后 Build `RecursionError` 仍为 FAIL；本次变量表编辑 PASS 不覆盖或修复该缺陷 |
+| 板端与实机 | SKIP：未执行板端 Stop/Transfer/Run、Force、SDO 写入或电机运动；无当前版硬件验收 |
+
 
 ## 阶段五：公开仓库与网站验收（2026-11-19）
 
@@ -155,7 +169,7 @@ CiA 402 工程复制后仅清理上游 README 首行两个 Markdown 尾部空格
 
 第一次直接调用保存工程测试缺少包内 MatIEC `bin` 的 `PATH`，运行失败；补齐包内路径后 1/1 PASS。源码仓库现有 CMake 缓存最初没有 MatIEC，`V10_ST_LookAhead` 报 SKIP；重新配置 `IC_MATIEC_EXECUTABLE` 后 1/1 PASS。V0.0.17 包裁掉 CTest 原始夹具源码，不能在包目录直接重新配置此项，实际 PASS 使用锁定提交的工作区 `ic-beremiz-motion` 源码和包内 MatIEC。随后在 CMake 当前目录误用 `-S .` 返回配置错误，改为源码根路径后才成功。这些初次失败和 SKIP 不计为通过。
 
-LD 编辑缺陷已在 V0.0.17 发布源码仓库 README、CHANGELOG 与 TEST_REPORT 追记；尚未修复、没有移动标签或重打归档。**案例 04 的“LD 编辑后可构建”要求仍未满足。**
+LD 编辑缺陷已在 V0.0.17 发布源码仓库 README、CHANGELOG 与 TEST_REPORT 追记；尚未修复、没有移动标签或重打归档。截至本阶段，**触点取反编辑后可构建**仍未满足；阶段六另验证了变量初值编辑后的成功构建和仿真，两条路径不可混同。
 
 本阶段暂存 42 个文件的文字敏感模式扫描命中 0，图片摘要与来源表逐项一致。新增约 2651 行中，原样复制的 PLCopen LD `plc.xml` 占 2090 行；超过通常的 2000 行阶段原则是为保留可打开、可构建的真实 LD 工程，未扩展产品源码功能。
 
