@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ProcessRecipe xmlns:xsd="http://www.w3.org/2001/XMLSchema" RecipeName="SawRecipe" GlobalName="Recipe_Saw" ProductLength="100" SyncStart="20" CutPosition="50" SyncEnd="80" SlaveScale="1" CutTolerance="1" MarkMode="true"/>

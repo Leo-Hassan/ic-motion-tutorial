@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VirtualAxis xmlns:xsd="http://www.w3.org/2001/XMLSchema" AxisName="Flying Saw Carriage" GlobalName="SawAxis" InitialPosition="0" MinimumPosition="-1000000" MaximumPosition="1000000" MaximumVelocity="5000"/>

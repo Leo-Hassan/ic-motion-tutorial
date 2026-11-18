@@ -50,6 +50,9 @@ nav:
       - 08 电子齿轮与相位调整: v0.0.17/cases/08-electronic-gear.md
       - 09 电子凸轮与表切换: v0.0.17/cases/09-electronic-cam.md
       - 10 二维协调路径: v0.0.17/cases/10-two-dimensional-path.md
+      - 11 跟踪切: v0.0.17/cases/11-tracking-cut.md
+      - 12 飞剪: v0.0.17/cases/12-flying-saw.md
+      - 13 旋切: v0.0.17/cases/13-rotary-knife.md
   - V0.0.14 手册:
       - 手册首页: v0.0.14/index.md
       - 版本与证据: v0.0.14/versions.md

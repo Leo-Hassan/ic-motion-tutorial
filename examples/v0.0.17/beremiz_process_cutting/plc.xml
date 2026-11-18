@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6.xsd">
+  <fileHeader companyName="Industrial Control Platform" productName="Tracking Saw Rotary Simulation" productVersion="15.2.0" creationDateTime="2026-09-28T23:52:28"/>
+  <contentHeader name="IC Motion Process Cutting" version="15.2.0" modificationDateTime="2026-09-28T23:52:28">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="8" y="8"/>
+      </fbd>
+      <ld>
+        <scaling x="8" y="8"/>
+      </ld>
+      <sfc>
+        <scaling x="8" y="8"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <externalVars>
+            <variable name="Master">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="TrackingAxis">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="SawAxis">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="KnifeAxis">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+            <variable name="Recipe_Tracking">
+              <type>
+                <derived name="PROCESS_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Recipe_Saw">
+              <type>
+                <derived name="PROCESS_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Recipe_Knife">
+              <type>
+                <derived name="PROCESS_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="Recipe_Unreachable">
+              <type>
+                <derived name="PROCESS_RECIPE_REF"/>
+              </type>
+            </variable>
+          </externalVars>
+          <localVars>
+            <variable name="ActiveTrackingRecipe">
+              <type>
+                <derived name="PROCESS_RECIPE_REF"/>
+              </type>
+            </variable>
+            <variable name="PowerTracking">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="PowerSaw">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="PowerKnife">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="TrackingCut">
+              <type>
+                <derived name="IC_TrackingCut"/>
+              </type>
+            </variable>
+            <variable name="FlyingSaw">
+              <type>
+                <derived name="IC_FlyingSaw"/>
+              </type>
+            </variable>
+            <variable name="RotaryKnife">
+              <type>
+                <derived name="IC_RotaryKnife"/>
+              </type>
+            </variable>
+            <variable name="AxisEnable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="TrackingRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="TrackingMark">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="TrackingProcessEnable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="SawRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="SawMark">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="SawProcessEnable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="KnifeRequest">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="KnifeMark">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="KnifeProcessEnable">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseBadTrackingRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="UseUnreachableTrackingRecipe">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p><![CDATA[PowerTracking(Axis := TrackingAxis, Enable := AxisEnable);
+PowerSaw(Axis := SawAxis, Enable := AxisEnable);
+PowerKnife(Axis := KnifeAxis, Enable := AxisEnable);
+
+IF UseBadTrackingRecipe THEN
+    ActiveTrackingRecipe := 0;
+ELSIF UseUnreachableTrackingRecipe THEN
+    ActiveTrackingRecipe := Recipe_Unreachable;
+ELSE
+    ActiveTrackingRecipe := Recipe_Tracking;
+END_IF;
+
+TrackingCut(Master := Master, Slave := TrackingAxis,
+            Recipe := ActiveTrackingRecipe, Enable := TrackingRequest,
+            Mark := TrackingMark, ProcessEnable := TrackingProcessEnable);
+FlyingSaw(Master := Master, Slave := SawAxis,
+          Recipe := Recipe_Saw, Enable := SawRequest,
+          Mark := SawMark, ProcessEnable := SawProcessEnable);
+RotaryKnife(Master := Master, Slave := KnifeAxis,
+            Recipe := Recipe_Knife, Enable := KnifeRequest,
+            Mark := KnifeMark, ProcessEnable := KnifeProcessEnable);
+]]></xhtml:p>
+          </ST>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="config">
+        <resource name="resource1">
+          <task name="ProcessTask" priority="0" interval="T#1ms">
+            <pouInstance name="MAIN0" typeName="MAIN"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

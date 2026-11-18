@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<EncoderAxis xmlns:xsd="http://www.w3.org/2001/XMLSchema" AxisName="Simulation Web Encoder" GlobalName="Master" CountsPerRevolution="100" EngineeringUnit="unit" UnitsPerRevolution="100" GearRatio="1" ZeroOffset="0" ModuloPeriod="0" ContinuousUnwrap="false" MaximumAgeCycles="1" MinimumPosition="-1000000" MaximumPosition="1000000" MaximumVelocity="1000000000" SourceMode="Simulation" SimulationInitialCount="0" SimulationIncrementCounts="1"/>

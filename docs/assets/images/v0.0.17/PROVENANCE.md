@@ -1,4 +1,4 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：38 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：44 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
@@ -10,7 +10,9 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 
 同步工程六图从同包 `Beremiz.py` 打开 `beremiz_sync_gear_cam` 的临时副本。真实鼠标打开 `MAIN`、Synchronization、Cam_A 和 Cam_B；原始保存工程的 V0.0.17 GUI Build 显示 `Successfully built.`。首次在打开编辑器后立即 F11 遇到 `wxYield called recursively`，重启真实 IDE，等工程加载完成再从未编辑副本执行 Build 成功；该失败列入测试报告。六图均为外部 `gnome-screenshot` 实拍，只裁剪窗口区域；本次截图没有包含首次报错对话框，因为案例使用后续可复现的成功步骤。
 
-二维路径四图从同包 `Beremiz.py` 打开 `beremiz_coordinated_path` 的未编辑临时副本；先完成 GUI Build，再用真实鼠标打开 `Group_XY`、`MixedPath` 和 `MAIN`。外部 `gnome-screenshot` 拍全屏，只裁剪真实 IDE 窗口区域；图 4 保留同屏的 Build 成功 Console。所有 38 张均未绘制、合成或 AI 生成 UI。
+二维路径四图从同包 `Beremiz.py` 打开 `beremiz_coordinated_path` 的未编辑临时副本；先完成 GUI Build，再用真实鼠标打开 `Group_XY`、`MixedPath` 和 `MAIN`。外部 `gnome-screenshot` 拍全屏，只裁剪真实 IDE 窗口区域；图 4 保留同屏的 Build 成功 Console。
+
+工艺切割六图从同包 `Beremiz.py` 打开 `beremiz_process_cutting` 的临时副本；先 GUI Build 成功，再真实点击 Master Commissioning、TrackingRecipe/SawRecipe/KnifeRecipe Config 和 `MAIN`。三张配方页只读取已保存工程值，没有改写或 Apply。外部 `gnome-screenshot` 拍全屏并只裁剪 IDE 窗口；原工程无 Runtime 连接，底栏始终 `Online:OFFLINE`。所有 44 张均未绘制、合成或 AI 生成 UI。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -52,5 +54,11 @@ IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临�
 | `path-mixed-recipe.png` | 双击 MixedPath，显示八段二维路径表和预览 | `2529038700474944e6c1919d250e2221448ae5e24ce80f3bf698dc818688a83d` |
 | `path-st-editor.png` | 打开 `MAIN`，显示上电、轴组使能和配方选择起始代码 | `baf4b977fadc879041e6db75aab361cf0ecd3265c19d203acbddc55f81f93d9d` |
 | `path-build-result.png` | `MAIN` 中查看 CoordinatedPath/GroupStop，Console 显示 `Successfully built.` | `d9373ea9cff510e4e0620306da4432992416044b4cf731b03bd7395283328282` |
+| `process-master-offline.png` | 双击 Master，Commissioning 显示离线编码器轴状态 | `dec1d5a77dffa02c8f9d372689c00df4ad6cbeee4380ee41b49221d0e0ea42b9` |
+| `process-tracking-recipe.png` | 双击 TrackingRecipe/Config，读取产品长度、同步窗口、切点、比例与容差 | `fdff6a1a30ca600655741ce85bfaabbd99ee3627045fb9df2dce7273fd4d1caf` |
+| `process-saw-recipe.png` | 双击 SawRecipe/Config，读取飞剪对应的工艺配方 | `f1a014d9ac6b7c31b50922c2568911c6c68a7d27103318d721c7e937c41dc8d0` |
+| `process-knife-recipe.png` | 双击 KnifeRecipe/Config，读取旋切配方与比例 360 | `326d4061f723bde929d1c104f32119df7984e1ba55390dc7ad3215a81e36e597` |
+| `process-st-editor.png` | 打开 `MAIN`，查看三轴上电、跟踪切及飞剪调用起始行 | `d02a3bac6d7a59e4688f84f7bd8381a6a95871deb1212c4569381d68c39c702b` |
+| `process-build-result.png` | `MAIN` 中查看三种工艺块完整调用和 Console `Successfully built.` | `739bcf48a1d3c3fd7975f5b006de956cc2b513a673a718a244e141687049e0bd` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。

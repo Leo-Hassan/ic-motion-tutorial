@@ -27,3 +27,5 @@
 阶段三庚从 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_sync_gear_cam/` 原样复制 15 个跟踪工程文件至本站 `examples/v0.0.17/beremiz_sync_gear_cam/`，包括原清单；上游版权为 2026 Industrial Control Platform contributors，SPDX MIT，完整许可证沿用同级 `LICENSE.ic-beremiz-motion`。相邻 `beremiz_sync_gear_cam.SOURCE.md` 记录原路径、修改范围和未来版本需重新验证的边界。V0.0.17 包内测试源码只在本机调用，没有复制到本站。
 
 阶段三辛从相同 `ic-beremiz-motion` 提交的 `examples/beremiz_coordinated_path/` 原样复制 19 个跟踪工程文件至本站 `examples/v0.0.17/beremiz_coordinated_path/`，包括原清单、XY 组和四个 PathRecipe；上游版权、SPDX MIT 与完整许可证仍见同级 `LICENSE.ic-beremiz-motion`。相邻 `beremiz_coordinated_path.SOURCE.md` 记录路径、修改和未来版本替换边界。包内测试与生成器源码只在本机调用，没有复制进教程。
+
+阶段三壬从相同 `ic-beremiz-motion` 提交的 `examples/beremiz_process_cutting/` 原样复制 21 个跟踪工程文件至本站 `examples/v0.0.17/beremiz_process_cutting/`，包括原清单、模拟主轴、三根虚轴和四张 ProcessRecipe；上游版权、SPDX MIT 与完整许可证仍见同级 `LICENSE.ic-beremiz-motion`。相邻 `beremiz_process_cutting.SOURCE.md` 记录路径、修改和未来版本替换边界。包内测试与生成器源码仅在本机调用，没有复制进教程。

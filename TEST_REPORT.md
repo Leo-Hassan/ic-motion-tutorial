@@ -1,6 +1,22 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～10 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～13 与软件操作已有证据；LD 触点取反失败，全站浏览器验收和公开发布待续。
 
 # 测试报告
+
+## 阶段三壬：跟踪切、飞剪和旋切（2026-11-18）
+
+三篇案例共用从 `ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 原样复制的 `examples/beremiz_process_cutting/`，21 个跟踪工程文件包括 manifest、模拟编码器 Master、三根 VirtualAxis 和四张 ProcessRecipe。当前包版本 V0.0.17，工程内部 `productVersion=15.2.0` 是示例工程自身版本，不是 IDE 发布版本；测试文件名的 `v15` 同样不代表本次运行了 V0.0.15 IDE。三篇共用同一组构建/仿真证据，不重复计为三次独立运行。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 首次包内保存工程测试 | `scripts/verify_process_cutting.sh` 初次 2 项中工作流项 PASS，构建项 **FAIL**：`matiec installation is not found`，返回 1；包内旧测试把 `IC_MATIEC_DIR` 同时当作 `MATIEC_PATH` 和 `lib/C` 根目录，首版包装脚本误设为 `matiec/bin` |
+| 修正后保存工程测试 | 包装脚本将 `IC_MATIEC_DIR` 设为包内 `matiec` 根目录，另把 `matiec/bin` 加到 PATH；复跑返回 0、2/2 PASS，耗时 136.844 秒。控制器生成/保存/重开/另存/备份/恢复 PASS；同一保存工程两次 Clean Build 的七项摘要一致 |
+| 保存工程 C 仿真 | `TrackingCut/FlyingSaw/RotaryKnife batch=5/5/5 permits=5/5/5` PASS，软件检查同步、返回、连续旋切，以及坏配方、漏标、重复切割请求、禁止许可、跳产品、反向、资源占用、不可达条件下的 FaultStopping、停止和执行器释放。三种块共用本次夹具运行 |
+| 独立 CLI Clean Build | `scripts/clean_build.sh` 返回 0，SO SHA-256 `3400dd3d527864775cc3d3ba43317092ce62df2eb1d05f66f9171a8b29dce01b`，变量表 `45b9977c762f47c47df15e738c0964401b1cbd33d84ee05ba512a6866bb331b3`；与前项两次 Build 相同，工程身份 `g2 ad7b2f3cbfcb` |
+| 真实 IDE GUI Build | V0.0.17 包内 `Beremiz.py` 打开未编辑临时副本，工具栏 Build 后 Console `Successfully built.`；SO 与变量表完整 SHA-256 与 CLI 逐字节一致。真实 IDE 底栏 `Online:OFFLINE` |
+| 真实截图 | Master 离线状态、三张 ProcessRecipe Config、`MAIN` ST 和 GUI Build 成功六图；全部为真实 V0.0.17 包内 wx 窗口实拍，只裁剪窗口区域，SHA-256 见 `PROVENANCE.md` |
+| 板端与实机 | SKIP：无生产 Runtime 连接、PDO/DC、传感器/刀具/机械安全验收；未执行板端 Stop/Transfer/Run、Force、SDO 写入或电机运动 |
+
+包内 Python 测试仍输出两条 `ResourceWarning: unclosed file`，没有使复跑失败。工程 `ProcessTask=T#1ms` 为软件配置，不代表硬实时周期。21 个工程文件与锁定来源逐字节相同；`sh -n` 和 `git diff --check` PASS。站点 `mkdocs build --strict` 返回 0，生成 21 个 HTML 页面、88 条搜索索引；扫描 739 条站内页面/资源链接缺失 0，44 张 V0.0.17 PNG 与来源表摘要全部匹配。新工程/章节/脚本的本机绝对路径、私钥头、口令赋值及私有网段模式扫描命中 0。全站真实浏览器和 GitHub Pages 验收后续执行。
 
 ## 阶段三辛：二维协调路径（2026-11-18）
 
