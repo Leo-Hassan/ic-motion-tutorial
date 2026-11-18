@@ -1,10 +1,12 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：24 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：28 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
 2026-11-18 在本机 `DISPLAY=:0` 启动 `ic-platform-V0.0.17-linux-amd64`；启动前包内 `bin/ic-platform --version` 返回 `Industrial Control Platform V0.0.17`。`ps` 回查启动器和 `Beremiz.py` 路径均指向该包。`IC_SKIP_ERPC_TUNNEL=1`，常规操作窗口状态栏始终为离线。项目编辑截图从同一包内 `Beremiz.py` 打开教程工程的临时副本；通过真实 XTEST 鼠标和键盘输入展开树、打开编辑页并触发 `Ctrl+Alt+M`。映射页因 V0.0.17 启动器缺模块路径，使用本仓库 `open_mapping_offline.sh` 等价的包内路径补全环境打开真实 IDE；未使用模拟界面。前 18 张以 wx `ScreenDC` 读取真实窗口区域；`ld-build-recursion-error.png` 仅从同次全屏截图裁剪窗口区域。
 
-ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizIDE` 创建完整大桥 IDE 窗口，打开教程 ST 工程的临时副本。测试程序在 `127.0.0.1` 启动包内真实 eRPC Runtime，使用本机隔离调试候选，并为无已安装 BootApplication 的回环测试注入与该临时副本 Clean Build 匹配的部署身份。依次调用真实面板的断点、Attach、Step over、Continue、Detach；外部 `gnome-screenshot` 在各 GUI 事件完成后拍全屏并裁剪实际窗口区域。截图中底部 `Disconnected/Online:OFFLINE` 反映没有生产 Runtime 连接；右侧调试状态来自回环服务。所有 24 张均未绘制、合成或 AI 生成 UI。临时 SO、map、会话描述和测试日志未加入仓库。
+ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizIDE` 创建完整大桥 IDE 窗口，打开教程 ST 工程的临时副本。测试程序在 `127.0.0.1` 启动包内真实 eRPC Runtime，使用本机隔离调试候选，并为无已安装 BootApplication 的回环测试注入与该临时副本 Clean Build 匹配的部署身份。依次调用真实面板的断点、Attach、Step over、Continue、Detach；外部 `gnome-screenshot` 在各 GUI 事件完成后拍全屏并裁剪实际窗口区域。截图中底部 `Disconnected/Online:OFFLINE` 反映没有生产 Runtime 连接；右侧调试状态来自回环服务。临时 SO、map、会话描述和测试日志未加入仓库。
+
+IS620N 四图从同包 `Beremiz.py` 真实窗口打开仅含工程源码的临时教学副本；为本地离线交叉构建，在**临时** `confnode.xml` 将 IgH SDK 占位符换为本机 SDK 路径，教程仓库文件仍不含绝对路径。GUI 无 Runtime 连接，未导入原工程的 `psk/`、`build/`、`TEST_REPORT.md` 或历史测试物。外部 `gnome-screenshot` 全屏实拍后只裁剪 IDE 窗口区域。所有 28 张均未绘制、合成或 AI 生成 UI。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -32,5 +34,9 @@ ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizI
 | `st-debug-speed20.png` | 第二次 Step over，`Speed=20`、`ScanCount=0` | `4dd5449d15bcee87e56f93b771394a035ec974218289eaef734c2c5dcc14ac13` |
 | `st-debug-continued.png` | Continue 后在下一扫描的第一条断点停住，`ScanCount=1` | `c3ecd1ae505aab1306a46c48c70002bccaef185ba54400fbf5f90e7c14de3988` |
 | `st-debug-exit.png` | Detach 后 Detached 且 ST 内联值移除 | `ecf90dd943e03aed13606e77d06c57274862c42745b0d277ea37665268e076c7` |
+| `is620n-st-editor.png` | 教学副本 `DualCirclePanel` ST、双轴工程树、离线状态 | `190c08d89e54d063d9b4687ee53ba9ef590670bc4fe5a9495ed55707e9ee217a` |
+| `is620n-axis-offline.png` | `Axis_1` Commissioning 页显示 OFFLINE 与 ±0.95 转 | `33a08dd0f0587f546b87d0bc7f18b5aa937ed92992be367d607b45707a2e528e` |
+| `is620n-axis-config.png` | `Axis_1` Config 页显示 CSP、counts/转和软件限位 | `4cbc3e0e862cf7069c3ca95466d1b4a9c8abd56d3eb61db45fa948caa5f55f05` |
+| `is620n-build-result.png` | 同副本真实 IDE `F11` 后 Console 显示 `Successfully built.` 和未保存身份提示 | `afa3fad23be283b4bebf7a20a5a1f06de7f98ebc00990e49e92428bd8fd0d324` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。

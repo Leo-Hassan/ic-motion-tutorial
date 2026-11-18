@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CExtension
+  CFLAGS="-D_GNU_SOURCE -pthread -DIS620N_BEREMIZ_TRACE_CAPACITY=300000U -I&quot;${IC_MODULE_ROOT}/IGH_RK_1.6-master/beremiz_adapter&quot; -I&quot;${IC_MODULE_ROOT}/ic-beremiz-motion/include&quot; -I&quot;${IC_MODULE_ROOT}/ic-axis/include&quot; -I&quot;${IC_MODULE_ROOT}/ic-motion/include&quot; -I&quot;${IC_MODULE_ROOT}/ic-servo-cia402/include&quot; -I&quot;${IC_MODULE_ROOT}/ic-hal/include&quot; -I${IC_TUTORIAL_IGH_SDK}/include"
+  LDFLAGS="-pthread -L${IC_TUTORIAL_IGH_SDK}/lib -lethercat"/>

@@ -1,6 +1,22 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～06 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～07 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三己：IS620N 双实轴离线工程（2026-11-18）
+
+从 `IGH_RK_1.6-master` 提交 `e6308f19cafe6c591e2dea0c8ba92b0349b746be` 的 `beremiz_projects/is620n_cia402_dual_circle_online/` 复制 11 个工程跟踪文件；没有复制 README 中的历史实机报告、`TEST_REPORT.md`、未跟踪 `psk/`、`build/`、`Testing/` 或 `test-results/`。`beremiz.xml` 的绝对交叉编译器改为工具名；C extension 的 IgH include/lib 改为教学占位符且移除旧板端 rpath，只有临时副本在构建/打开时解析本地路径。静态扫描本目录的 `/home/`、`/root/`、`psk`、`secret`、`private`、`password` 命中 0。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 静态配置核对 | `verify_is620n_offline_config.py` PASS：根 1 ms、`MotionTask=T#1ms`、双轴 CSP、通道 1/2、每轴 ±0.95 转、1,048,576 counts/转，IgH 路径占位符 2 处 |
+| V0.0.17 包内 CLI Clean Build | 真实 IgH AArch64 SDK 和交叉工具链在本机提供，临时教学副本 Clean Build PASS；SO SHA-256 `e85cd37c6620d23b92e26022ba5bce5d4bc58daa959a983ce96c8d7f97f25ded`，变量表 `843cd871ebd5ab5e58075bb7293d061cbda2f608db5859aa5b08247af1298fa7`；`Build identity unavailable`，没有部署 |
+| 真实 IDE 构建 | 相同包内 `Beremiz.py` 打开临时副本，`F11` Console `Successfully built.`；SO 与变量表 SHA-256 和 CLI **逐字节一致**；`file` 确认 SO 为 AArch64 ELF 共享对象，`readelf -Ws` 未见 `CPU_ZERO`/`CPU_SET`/`CPU_ISSET`/`__atomic` 未定义符号 |
+| 真实 IDE 配置/截图 | `DualCirclePanel`、Axis_1 Commissioning OFFLINE、Config CSP/±0.95、Console 构建成功四图；摘要见 `PROVENANCE.md`；`open_is620n_offline.sh` 实际启动该包 IDE，关闭后返回 0 且临时工程已删除 |
+| 离线仿真与板端 | SKIP：此双实轴工程无独立 PDO/DC 过程映像仿真；没有 Connect、Stop、Transfer、Run、Force、SDO 写入或电机运动，历史实机报告未计入当前版本 |
+
+首次运行教学构建脚本把交叉工具链目录置于 PATH 首位，调用了工具链自带的不兼容 Python，`beremiz_cli_compat.py` 报 `No module named 'click'`；增加主机 Python shim 后通过编译。第二次编译到链接阶段报 `cannot find -lethercat`：本版 Beremiz 把 `${IC_TUTORIAL_IGH_SDK}` 在 LDFLAGS 中原样传给链接器；脚本改为仅在临时工程副本将两个占位符替换为 SDK 路径，重建 PASS。原始两次失败保留，不把初次尝试记作成功。GUI 点击 Config 后窗口显示 `~project~`，构建提示 `Build identity unavailable: unsaved project changes`；无论原因，教学副本不具备部署身份。
+
+本阶段 `PYTHONPATH=.deps python3 -m mkdocs build --strict` 返回 0，生成 14 个 HTML 页面、58 条搜索索引记录。静态扫描 425 条站内页面/资源链接，缺失 0；28 张 V0.0.17 PNG 的 SHA-256 与来源表逐项匹配。两个 shell 脚本 `sh -n`、静态配置核对与 `git diff --check` 均通过。公开 IDE V0.0.17 发布、全站浏览器验收和 GitHub Pages 仍待后续阶段。
 
 ## 阶段三戊：ST 断点与单步（2026-11-18）
 

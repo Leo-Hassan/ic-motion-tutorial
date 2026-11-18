@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CFile xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+       xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <includes><xhtml:p><![CDATA[
+#include "is620n_dual_online_guard.c"
+#include "is620n_beremiz_dual_circle_adapter.c"
+]]></xhtml:p></includes>
+  <variables>
+    <variable name="PDO_RealtimeReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_RealtimeError" type="UINT" class="output" initial="0"/>
+    <variable name="PDO_RealtimeCPU" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_RealtimePriority" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_RealtimePolicy" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_MasterRealtimeReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_MasterRealtimeError" type="UINT" class="output" initial="0"/>
+    <variable name="PDO_MasterRealtimeCPU" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_MasterRealtimePriority" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_MasterRealtimePolicy" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_PLCRealtimeReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_PLCRealtimeError" type="UINT" class="output" initial="0"/>
+    <variable name="PDO_PLCRealtimeCPU" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_PLCRealtimePriority" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_PLCRealtimePolicy" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExchangeEnabled" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_MotionApplyEnabled" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_DCLocked" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_DCOver50us" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_MasterDeadlineMisses" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_InputReadRetries" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputReadRetries" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputFresh" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_OutputValid" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_OutputSequence" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputInputCycle" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputAgeCycles" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputMaximumAgeCycles" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputStaleEvents" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSequenceErrors" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSkippedSequences" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputDeadlineMisses" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_InputWaitTimeouts" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_InputMissedCycles" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_PLCReleaseLatencyNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCReleaseLatencyMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCReleaseLatencyMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCReleaseLatencySumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_PLCReleaseLatencySamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExecutionNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExecutionMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExecutionMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExecutionSumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_PLCExecutionSamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSlackNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSlackMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSlackMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSlackSumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_OutputSlackSamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_SafetyReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_EnableReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_ResetReady" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_GuardError" type="UINT" class="output" initial="1"/>
+    <variable name="PDO_GuardTripAxis" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_GuardTripRawCycles" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_GuardTripPositionCycles" type="USINT" class="output" initial="0"/>
+    <variable name="PDO_GuardTripRawVelocity" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_GuardTripPositionDelta" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_GuardTripWindowVelocity" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_Statusword0" type="WORD" class="output" initial="0"/>
+    <variable name="PDO_Statusword1" type="WORD" class="output" initial="0"/>
+    <variable name="PDO_DriveError0" type="WORD" class="output" initial="0"/>
+    <variable name="PDO_DriveError1" type="WORD" class="output" initial="0"/>
+    <variable name="PDO_ActualPosition0" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_ActualPosition1" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_ActualVelocity0" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_ActualVelocity1" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_RawActualVelocity0" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_RawActualVelocity1" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_ModeDisplay0" type="SINT" class="output" initial="0"/>
+    <variable name="PDO_ModeDisplay1" type="SINT" class="output" initial="0"/>
+    <variable name="PDO_Operational0" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_Operational1" type="BOOL" class="output" initial="FALSE"/>
+    <variable name="PDO_WorkingCounter" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_Cycle" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_StableCycles" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_InterpolationPeriodNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_InterpolationPeriodMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_InterpolationPeriodMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_InterpolationPeriodSumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_InterpolationSamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_ConfiguredMasterPeriodNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_MasterPeriodNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_MasterPeriodMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_MasterPeriodMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_MasterPeriodSumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_MasterPeriodSamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_DCPeriodNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_DCPeriodMinNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_DCPeriodMaxNs" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_DCPeriodSumNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_DCSamples" type="UDINT" class="output" initial="0"/>
+    <variable name="PDO_DCPhaseNs" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_DCPhaseMinNs" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_DCPhaseMaxNs" type="DINT" class="output" initial="0"/>
+    <variable name="PDO_DCPhaseSumAbsNs" type="ULINT" class="output" initial="0"/>
+    <variable name="PDO_DCPhaseSamples" type="UDINT" class="output" initial="0"/>
+  </variables>
+  <globals><xhtml:p><![CDATA[
+]]></xhtml:p></globals>
+  <initFunction><xhtml:p><![CDATA[
+if (is620n_beremiz_dual_init() != 0) return -1;
+]]></xhtml:p></initFunction>
+  <cleanUpFunction><xhtml:p><![CDATA[
+is620n_beremiz_dual_cleanup();
+]]></xhtml:p></cleanUpFunction>
+  <retrieveFunction><xhtml:p><![CDATA[
+is620n_beremiz_dual_retrieve();
+PDO_RealtimeReady = is620n_beremiz_dual_realtime_ready();
+PDO_RealtimeError = is620n_beremiz_dual_realtime_error();
+PDO_RealtimeCPU = is620n_beremiz_dual_realtime_cpu();
+PDO_RealtimePriority = is620n_beremiz_dual_realtime_priority();
+PDO_RealtimePolicy = is620n_beremiz_dual_realtime_policy();
+PDO_MasterRealtimeReady = is620n_beremiz_dual_master_realtime_ready();
+PDO_MasterRealtimeError = is620n_beremiz_dual_master_realtime_error();
+PDO_MasterRealtimeCPU = is620n_beremiz_dual_master_realtime_cpu();
+PDO_MasterRealtimePriority = is620n_beremiz_dual_master_realtime_priority();
+PDO_MasterRealtimePolicy = is620n_beremiz_dual_master_realtime_policy();
+PDO_PLCRealtimeReady = is620n_beremiz_dual_plc_realtime_ready();
+PDO_PLCRealtimeError = is620n_beremiz_dual_plc_realtime_error();
+PDO_PLCRealtimeCPU = is620n_beremiz_dual_plc_realtime_cpu();
+PDO_PLCRealtimePriority = is620n_beremiz_dual_plc_realtime_priority();
+PDO_PLCRealtimePolicy = is620n_beremiz_dual_plc_realtime_policy();
+PDO_PLCExchangeEnabled = is620n_beremiz_dual_plc_exchange_enabled();
+PDO_MotionApplyEnabled = is620n_beremiz_dual_motion_apply_enabled();
+PDO_DCLocked = is620n_beremiz_dual_dc_locked();
+PDO_DCOver50us = is620n_beremiz_dual_dc_over_50us();
+PDO_MasterDeadlineMisses = is620n_beremiz_dual_master_deadline_misses();
+PDO_InputReadRetries = is620n_beremiz_dual_input_read_retries();
+PDO_OutputReadRetries = is620n_beremiz_dual_output_read_retries();
+PDO_OutputFresh = is620n_beremiz_dual_output_fresh();
+PDO_OutputValid = is620n_beremiz_dual_output_valid();
+PDO_OutputSequence = is620n_beremiz_dual_output_sequence();
+PDO_OutputInputCycle = is620n_beremiz_dual_output_input_cycle();
+PDO_OutputAgeCycles = is620n_beremiz_dual_output_age_cycles();
+PDO_OutputMaximumAgeCycles = is620n_beremiz_dual_output_maximum_age_cycles();
+PDO_OutputStaleEvents = is620n_beremiz_dual_output_stale_events();
+PDO_OutputSequenceErrors = is620n_beremiz_dual_output_sequence_errors();
+PDO_OutputSkippedSequences = is620n_beremiz_dual_output_skipped_sequences();
+PDO_OutputDeadlineMisses = is620n_beremiz_dual_output_deadline_misses();
+PDO_InputWaitTimeouts = is620n_beremiz_dual_input_wait_timeouts();
+PDO_InputMissedCycles = is620n_beremiz_dual_input_missed_cycles();
+PDO_PLCReleaseLatencyNs = is620n_beremiz_dual_plc_release_latency_ns();
+PDO_PLCReleaseLatencyMinNs = is620n_beremiz_dual_plc_release_latency_min_ns();
+PDO_PLCReleaseLatencyMaxNs = is620n_beremiz_dual_plc_release_latency_max_ns();
+PDO_PLCReleaseLatencySumNs = is620n_beremiz_dual_plc_release_latency_sum_ns();
+PDO_PLCReleaseLatencySamples = is620n_beremiz_dual_plc_release_latency_samples();
+PDO_PLCExecutionNs = is620n_beremiz_dual_plc_execution_ns();
+PDO_PLCExecutionMinNs = is620n_beremiz_dual_plc_execution_min_ns();
+PDO_PLCExecutionMaxNs = is620n_beremiz_dual_plc_execution_max_ns();
+PDO_PLCExecutionSumNs = is620n_beremiz_dual_plc_execution_sum_ns();
+PDO_PLCExecutionSamples = is620n_beremiz_dual_plc_execution_samples();
+PDO_OutputSlackNs = is620n_beremiz_dual_output_slack_ns();
+PDO_OutputSlackMinNs = is620n_beremiz_dual_output_slack_min_ns();
+PDO_OutputSlackMaxNs = is620n_beremiz_dual_output_slack_max_ns();
+PDO_OutputSlackSumNs = is620n_beremiz_dual_output_slack_sum_ns();
+PDO_OutputSlackSamples = is620n_beremiz_dual_output_slack_samples();
+PDO_SafetyReady = is620n_beremiz_dual_safety_ready();
+PDO_EnableReady = is620n_beremiz_dual_enable_ready();
+PDO_ResetReady = is620n_beremiz_dual_reset_ready();
+PDO_GuardError = is620n_beremiz_dual_guard_error();
+PDO_GuardTripAxis = is620n_beremiz_dual_guard_trip_axis();
+PDO_GuardTripRawCycles = is620n_beremiz_dual_guard_trip_raw_cycles();
+PDO_GuardTripPositionCycles = is620n_beremiz_dual_guard_trip_position_cycles();
+PDO_GuardTripRawVelocity = is620n_beremiz_dual_guard_trip_raw_velocity();
+PDO_GuardTripPositionDelta = is620n_beremiz_dual_guard_trip_position_delta();
+PDO_GuardTripWindowVelocity = is620n_beremiz_dual_guard_trip_window_velocity();
+PDO_Statusword0 = is620n_beremiz_dual_statusword(0);
+PDO_Statusword1 = is620n_beremiz_dual_statusword(1);
+PDO_DriveError0 = is620n_beremiz_dual_drive_error(0);
+PDO_DriveError1 = is620n_beremiz_dual_drive_error(1);
+PDO_ActualPosition0 = is620n_beremiz_dual_position(0);
+PDO_ActualPosition1 = is620n_beremiz_dual_position(1);
+PDO_ActualVelocity0 = is620n_beremiz_dual_velocity(0);
+PDO_ActualVelocity1 = is620n_beremiz_dual_velocity(1);
+PDO_RawActualVelocity0 = is620n_beremiz_dual_raw_velocity(0);
+PDO_RawActualVelocity1 = is620n_beremiz_dual_raw_velocity(1);
+PDO_ModeDisplay0 = is620n_beremiz_dual_mode(0);
+PDO_ModeDisplay1 = is620n_beremiz_dual_mode(1);
+PDO_Operational0 = is620n_beremiz_dual_operational(0);
+PDO_Operational1 = is620n_beremiz_dual_operational(1);
+PDO_WorkingCounter = is620n_beremiz_dual_working_counter();
+PDO_Cycle = is620n_beremiz_dual_cycle();
+PDO_StableCycles = is620n_beremiz_dual_stable_cycles();
+PDO_InterpolationPeriodNs = is620n_beremiz_dual_interpolation_period_ns();
+PDO_InterpolationPeriodMinNs = is620n_beremiz_dual_interpolation_period_min_ns();
+PDO_InterpolationPeriodMaxNs = is620n_beremiz_dual_interpolation_period_max_ns();
+PDO_InterpolationPeriodSumNs = is620n_beremiz_dual_interpolation_period_sum_ns();
+PDO_InterpolationSamples = is620n_beremiz_dual_interpolation_samples();
+PDO_ConfiguredMasterPeriodNs = is620n_beremiz_dual_configured_master_period_ns();
+PDO_MasterPeriodNs = is620n_beremiz_dual_master_period_ns();
+PDO_MasterPeriodMinNs = is620n_beremiz_dual_master_period_min_ns();
+PDO_MasterPeriodMaxNs = is620n_beremiz_dual_master_period_max_ns();
+PDO_MasterPeriodSumNs = is620n_beremiz_dual_master_period_sum_ns();
+PDO_MasterPeriodSamples = is620n_beremiz_dual_master_period_samples();
+PDO_DCPeriodNs = is620n_beremiz_dual_dc_period_ns();
+PDO_DCPeriodMinNs = is620n_beremiz_dual_dc_period_min_ns();
+PDO_DCPeriodMaxNs = is620n_beremiz_dual_dc_period_max_ns();
+PDO_DCPeriodSumNs = is620n_beremiz_dual_dc_period_sum_ns();
+PDO_DCSamples = is620n_beremiz_dual_dc_samples();
+PDO_DCPhaseNs = is620n_beremiz_dual_dc_phase_ns();
+PDO_DCPhaseMinNs = is620n_beremiz_dual_dc_phase_min_ns();
+PDO_DCPhaseMaxNs = is620n_beremiz_dual_dc_phase_max_ns();
+PDO_DCPhaseSumAbsNs = is620n_beremiz_dual_dc_phase_sum_abs_ns();
+PDO_DCPhaseSamples = is620n_beremiz_dual_dc_phase_samples();
+]]></xhtml:p></retrieveFunction>
+  <publishFunction><xhtml:p><![CDATA[
+is620n_beremiz_dual_publish();
+]]></xhtml:p></publishFunction>
+</CFile>

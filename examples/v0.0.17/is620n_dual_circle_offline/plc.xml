@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <fileHeader companyName="Industrial Control Platform" productName="IS620N Dual Circle"
+              productVersion="0.1.0" creationDateTime="2026-08-31T00:00:00"/>
+  <contentHeader name="IS620N Dual Axis Circle IDE Panel" modificationDateTime="2026-08-31T00:00:00">
+    <coordinateInfo><fbd><scaling x="8" y="8"/></fbd><ld><scaling x="8" y="8"/></ld><sfc><scaling x="8" y="8"/></sfc></coordinateInfo>
+  </contentHeader>
+  <types><dataTypes/><pous><pou name="DualCirclePanel" pouType="program">
+    <interface>
+      <externalVars>
+        <variable name="Axis_1"><type><derived name="AXIS_REF"/></type></variable>
+        <variable name="Axis_2"><type><derived name="AXIS_REF"/></type></variable>
+        <variable name="PDO_SafetyReady"><type><BOOL/></type></variable>
+        <variable name="PDO_EnableReady"><type><BOOL/></type></variable>
+        <variable name="PDO_ResetReady"><type><BOOL/></type></variable>
+        <variable name="PDO_GuardError"><type><UINT/></type></variable>
+        <variable name="PDO_Statusword0"><type><WORD/></type></variable>
+        <variable name="PDO_Statusword1"><type><WORD/></type></variable>
+        <variable name="PDO_DriveError0"><type><WORD/></type></variable>
+        <variable name="PDO_DriveError1"><type><WORD/></type></variable>
+        <variable name="PDO_ActualPosition0"><type><DINT/></type></variable>
+        <variable name="PDO_ActualPosition1"><type><DINT/></type></variable>
+        <variable name="PDO_ActualVelocity0"><type><DINT/></type></variable>
+        <variable name="PDO_ActualVelocity1"><type><DINT/></type></variable>
+        <variable name="PDO_ModeDisplay0"><type><SINT/></type></variable>
+        <variable name="PDO_ModeDisplay1"><type><SINT/></type></variable>
+        <variable name="PDO_Operational0"><type><BOOL/></type></variable>
+        <variable name="PDO_Operational1"><type><BOOL/></type></variable>
+        <variable name="PDO_WorkingCounter"><type><UDINT/></type></variable>
+        <variable name="PDO_StableCycles"><type><UDINT/></type></variable>
+        <variable name="PDO_Cycle"><type><ULINT/></type></variable>
+        <variable name="HMI_CommandKey"><type><UDINT/></type></variable>
+        <variable name="HMI_ArmSeq"><type><UDINT/></type></variable>
+        <variable name="HMI_DisarmSeq"><type><UDINT/></type></variable>
+        <variable name="HMI_ResetSeq"><type><UDINT/></type></variable>
+        <variable name="HMI_StartSeq"><type><UDINT/></type></variable>
+        <variable name="HMI_StopSeq"><type><UDINT/></type></variable>
+        <variable name="HMI_Enable"><type><BOOL/></type></variable>
+        <variable name="HMI_Radius"><type><LREAL/></type></variable>
+        <variable name="HMI_Velocity"><type><LREAL/></type></variable>
+        <variable name="HMI_Acceleration"><type><LREAL/></type></variable>
+        <variable name="HMI_Deceleration"><type><LREAL/></type></variable>
+        <variable name="HMI_PathChoice"><type><SINT/></type></variable>
+        <variable name="HMI_ArmAck"><type><UDINT/></type></variable>
+        <variable name="HMI_DisarmAck"><type><UDINT/></type></variable>
+        <variable name="HMI_ResetAck"><type><UDINT/></type></variable>
+        <variable name="HMI_StartAck"><type><UDINT/></type></variable>
+        <variable name="HMI_StopAck"><type><UDINT/></type></variable>
+        <variable name="HMI_Armed"><type><BOOL/></type></variable>
+        <variable name="HMI_Error"><type><BOOL/></type></variable>
+        <variable name="HMI_State"><type><UINT/></type></variable>
+        <variable name="HMI_ErrorID"><type><UDINT/></type></variable>
+        <variable name="HMI_PowerStatus0"><type><BOOL/></type></variable>
+        <variable name="HMI_PowerStatus1"><type><BOOL/></type></variable>
+        <variable name="HMI_CircleBusy"><type><BOOL/></type></variable>
+        <variable name="HMI_CircleDone"><type><BOOL/></type></variable>
+        <variable name="HMI_CircleCount"><type><UINT/></type></variable>
+        <variable name="HMI_StopBusy"><type><BOOL/></type></variable>
+        <variable name="HMI_StopDone"><type><BOOL/></type></variable>
+        <variable name="HMI_ResetBusy"><type><BOOL/></type></variable>
+        <variable name="HMI_ResetDone"><type><BOOL/></type></variable>
+      </externalVars>
+      <localVars>
+        <variable name="PowerX"><type><derived name="MC_Power"/></type></variable>
+        <variable name="PowerY"><type><derived name="MC_Power"/></type></variable>
+        <variable name="Circle"><type><derived name="MC_MoveCircular"/></type></variable>
+        <variable name="StopX"><type><derived name="MC_Stop"/></type></variable>
+        <variable name="StopY"><type><derived name="MC_Stop"/></type></variable>
+        <variable name="AutoState"><type><UINT/></type></variable>
+        <variable name="AutoDelayCycles"><type><UDINT/></type></variable>
+        <variable name="AutoStageCycles"><type><UDINT/></type></variable>
+        <variable name="AutoReadyCycles"><type><UDINT/></type></variable>
+        <variable name="GapCycles"><type><UDINT/></type></variable>
+        <variable name="AutoEnable"><type><BOOL/></type></variable>
+        <variable name="CircleExecute"><type><BOOL/></type></variable>
+        <variable name="StopLatch"><type><BOOL/></type></variable>
+        <variable name="SafetyOK"><type><BOOL/></type></variable>
+        <variable name="DriveReady"><type><BOOL/></type></variable>
+        <variable name="PowerEnable"><type><BOOL/></type></variable>
+      </localVars>
+    </interface>
+    <body><ST><xhtml:p><![CDATA[
+HMI_CommandKey := 0;
+HMI_ArmSeq := 0; HMI_DisarmSeq := 0; HMI_ResetSeq := 0;
+HMI_StartSeq := 0; HMI_StopSeq := 0;
+HMI_ArmAck := 0; HMI_DisarmAck := 0; HMI_ResetAck := 0;
+HMI_StartAck := 0; HMI_StopAck := 0;
+HMI_Radius := 0.45; HMI_Velocity := 0.10;
+HMI_Acceleration := 0.05; HMI_Deceleration := 0.05;
+HMI_PathChoice := 1;
+HMI_ResetBusy := FALSE; HMI_ResetDone := FALSE;
+SafetyOK := PDO_SafetyReady AND (NOT PDO_ResetReady) AND
+ (PDO_GuardError = 0) AND (PDO_DriveError0 = 0) AND (PDO_DriveError1 = 0) AND
+ PDO_Operational0 AND PDO_Operational1 AND (PDO_WorkingCounter = 6) AND
+ (PDO_StableCycles >= 400) AND (PDO_ModeDisplay0 = 8) AND (PDO_ModeDisplay1 = 8);
+DriveReady := ((PDO_Statusword0 AND 16#006F) = 16#0027) AND
+ ((PDO_Statusword1 AND 16#006F) = 16#0027);
+IF ((AutoState >= 3) AND (AutoState <= 5) AND (NOT SafetyOK)) OR
+   ((AutoState = 4) AND ((NOT DriveReady) OR (NOT PDO_EnableReady))) THEN
+ AutoState := 7; AutoStageCycles := 0;
+ AutoEnable := FALSE; CircleExecute := FALSE; GapCycles := 0;
+ StopLatch := HMI_PowerStatus0 OR HMI_PowerStatus1 OR HMI_CircleBusy;
+ HMI_Error := TRUE; HMI_ErrorID := 20738;
+END_IF;
+CASE AutoState OF
+0:
+ AutoEnable := FALSE; CircleExecute := FALSE; StopLatch := FALSE;
+ AutoDelayCycles := 0;
+ GapCycles := 0; HMI_CircleCount := 0;
+ HMI_CircleDone := FALSE; HMI_StopDone := FALSE;
+ HMI_Error := FALSE; HMI_ErrorID := 0;
+ IF SafetyOK THEN AutoState := 1; END_IF;
+1:
+ AutoEnable := FALSE; HMI_Error := FALSE; HMI_ErrorID := 0;
+ IF SafetyOK THEN
+  IF AutoDelayCycles < 3000 THEN AutoDelayCycles := AutoDelayCycles + 1; END_IF;
+  IF AutoDelayCycles >= 3000 THEN
+   AutoStageCycles := 0; AutoReadyCycles := 0; AutoState := 2;
+  END_IF;
+ ELSE AutoDelayCycles := 0;
+ END_IF;
+2:
+ AutoEnable := FALSE; AutoStageCycles := AutoStageCycles + 1;
+ IF (NOT PowerX.Error) AND (NOT PowerY.Error) AND
+    (NOT Circle.Error) AND (NOT StopX.Error) AND (NOT StopY.Error) THEN
+  IF AutoReadyCycles < 100 THEN AutoReadyCycles := AutoReadyCycles + 1; END_IF;
+ ELSE AutoReadyCycles := 0;
+ END_IF;
+ IF AutoReadyCycles >= 100 THEN
+  AutoEnable := TRUE; AutoStageCycles := 0; AutoState := 3;
+ ELSIF AutoStageCycles >= 1000 THEN
+  AutoState := 7; HMI_Error := TRUE;
+  IF PowerX.Error THEN HMI_ErrorID := PowerX.ErrorID;
+  ELSIF PowerY.Error THEN HMI_ErrorID := PowerY.ErrorID;
+  ELSIF Circle.Error THEN HMI_ErrorID := Circle.ErrorID;
+  ELSIF StopX.Error THEN HMI_ErrorID := StopX.ErrorID;
+  ELSIF StopY.Error THEN HMI_ErrorID := StopY.ErrorID;
+  ELSE HMI_ErrorID := 20743;
+  END_IF;
+ END_IF;
+3:
+ AutoEnable := TRUE; AutoStageCycles := AutoStageCycles + 1;
+ IF DriveReady AND PDO_EnableReady THEN
+  HMI_CircleCount := 0; HMI_CircleDone := FALSE; HMI_StopDone := FALSE;
+  CircleExecute := TRUE; GapCycles := 0; AutoState := 4;
+ ELSIF AutoStageCycles >= 5000 THEN
+  AutoState := 7; AutoEnable := FALSE; HMI_Error := TRUE; HMI_ErrorID := 20744;
+ END_IF;
+4: AutoEnable := TRUE;
+5:
+ AutoEnable := FALSE; CircleExecute := FALSE;
+ IF AutoStageCycles < 5000 THEN AutoStageCycles := AutoStageCycles + 1; END_IF;
+6: AutoEnable := FALSE; CircleExecute := FALSE;
+7:
+ AutoEnable := FALSE; CircleExecute := FALSE;
+ IF StopLatch AND (AutoStageCycles < 5000) THEN
+  AutoStageCycles := AutoStageCycles + 1;
+ END_IF;
+ELSE
+ AutoState := 7; AutoEnable := FALSE; CircleExecute := FALSE;
+ HMI_Error := TRUE; HMI_ErrorID := 20742;
+END_CASE;
+PowerEnable := SafetyOK AND (AutoEnable OR StopLatch);
+PowerX(Axis := Axis_1, Enable := PowerEnable);
+PowerY(Axis := Axis_2, Enable := PowerEnable);
+Circle(AxisX := Axis_1, AxisY := Axis_2, Execute := CircleExecute,
+ CenterX := -0.45, CenterY := 0.0, EndPositionX := 0.0, EndPositionY := 0.0,
+ PathChoice := 1, Velocity := 0.10,
+ Acceleration := 0.05, Deceleration := 0.05);
+IF (AutoState = 4) AND Circle.Done THEN
+ HMI_CircleCount := HMI_CircleCount + 1; CircleExecute := FALSE;
+ IF HMI_CircleCount < 2 THEN GapCycles := 1;
+ ELSE
+  HMI_CircleDone := TRUE; AutoEnable := FALSE; StopLatch := TRUE;
+  AutoStageCycles := 0; AutoState := 5;
+ END_IF;
+END_IF;
+IF (AutoState = 4) AND (GapCycles > 0) AND (NOT Circle.Done) THEN
+ GapCycles := GapCycles - 1;
+ IF GapCycles = 0 THEN CircleExecute := TRUE; END_IF;
+END_IF;
+IF (AutoState >= 3) AND (AutoState <= 5) AND
+   (PowerX.Error OR PowerY.Error OR Circle.Error) THEN
+ HMI_Error := TRUE; AutoState := 7; AutoStageCycles := 0; AutoEnable := FALSE;
+ CircleExecute := FALSE; GapCycles := 0;
+ StopLatch := HMI_PowerStatus0 OR HMI_PowerStatus1 OR Circle.Busy;
+ IF PowerX.Error THEN HMI_ErrorID := PowerX.ErrorID;
+ ELSIF PowerY.Error THEN HMI_ErrorID := PowerY.ErrorID;
+ ELSE HMI_ErrorID := Circle.ErrorID;
+ END_IF;
+END_IF;
+StopX(Axis := Axis_1, Execute := StopLatch);
+StopY(Axis := Axis_2, Execute := StopLatch);
+IF StopX.Done AND StopY.Done THEN
+ HMI_StopDone := TRUE; StopLatch := FALSE;
+ IF AutoState = 5 THEN AutoState := 6; END_IF;
+END_IF;
+IF ((AutoState = 5) OR (AutoState = 7)) AND StopLatch AND
+   (AutoStageCycles >= 5000) THEN
+ StopLatch := FALSE; AutoState := 7; HMI_Error := TRUE; HMI_ErrorID := 20745;
+END_IF;
+IF (AutoState >= 3) AND (AutoState <= 5) AND
+   (StopX.Error OR StopY.Error) THEN
+ HMI_Error := TRUE; AutoState := 7; AutoEnable := FALSE; StopLatch := FALSE;
+ IF StopX.Error THEN HMI_ErrorID := StopX.ErrorID; ELSE HMI_ErrorID := StopY.ErrorID; END_IF;
+END_IF;
+HMI_PowerStatus0 := (PDO_Statusword0 AND 16#006F) = 16#0027;
+HMI_PowerStatus1 := (PDO_Statusword1 AND 16#006F) = 16#0027;
+HMI_CircleBusy := Circle.Busy; HMI_StopBusy := StopX.Busy OR StopY.Busy;
+HMI_Enable := AutoEnable;
+HMI_Armed := (AutoState = 3) OR (AutoState = 4);
+IF AutoState = 7 THEN HMI_State := 7;
+ELSIF AutoState = 6 THEN HMI_State := 6;
+ELSIF NOT SafetyOK THEN HMI_State := 0;
+ELSIF (AutoState = 5) OR StopLatch OR HMI_StopBusy THEN HMI_State := 5;
+ELSIF Circle.Busy THEN HMI_State := 4;
+ELSIF PowerX.Status AND PowerY.Status THEN HMI_State := 3;
+ELSIF HMI_Armed THEN HMI_State := 2;
+ELSE HMI_State := 1;
+END_IF;
+]]></xhtml:p></ST></body>
+  </pou></pous></types>
+  <instances><configurations><configuration name="Config0">
+    <resource name="Resource0"><task name="MotionTask" priority="0" interval="T#1ms"><pouInstance name="MAIN0" typeName="DualCirclePanel"/></task></resource>
+    <globalVars>
+      <variable name="HMI_CommandKey"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_ArmSeq"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_DisarmSeq"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_ResetSeq"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_StartSeq"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_StopSeq"><type><UDINT/></type><initialValue><simpleValue value="0"/></initialValue></variable>
+      <variable name="HMI_Enable"><type><BOOL/></type><initialValue><simpleValue value="FALSE"/></initialValue></variable>
+      <variable name="HMI_Radius"><type><LREAL/></type><initialValue><simpleValue value="0.45"/></initialValue></variable>
+      <variable name="HMI_Velocity"><type><LREAL/></type><initialValue><simpleValue value="0.10"/></initialValue></variable>
+      <variable name="HMI_Acceleration"><type><LREAL/></type><initialValue><simpleValue value="0.05"/></initialValue></variable>
+      <variable name="HMI_Deceleration"><type><LREAL/></type><initialValue><simpleValue value="0.05"/></initialValue></variable>
+      <variable name="HMI_PathChoice"><type><SINT/></type><initialValue><simpleValue value="1"/></initialValue></variable>
+      <variable name="HMI_ArmAck"><type><UDINT/></type></variable>
+      <variable name="HMI_DisarmAck"><type><UDINT/></type></variable>
+      <variable name="HMI_ResetAck"><type><UDINT/></type></variable>
+      <variable name="HMI_StartAck"><type><UDINT/></type></variable>
+      <variable name="HMI_StopAck"><type><UDINT/></type></variable>
+      <variable name="HMI_Armed"><type><BOOL/></type></variable>
+      <variable name="HMI_Error"><type><BOOL/></type></variable>
+      <variable name="HMI_State"><type><UINT/></type></variable>
+      <variable name="HMI_ErrorID"><type><UDINT/></type></variable>
+      <variable name="HMI_PowerStatus0"><type><BOOL/></type></variable>
+      <variable name="HMI_PowerStatus1"><type><BOOL/></type></variable>
+      <variable name="HMI_CircleBusy"><type><BOOL/></type></variable>
+      <variable name="HMI_CircleDone"><type><BOOL/></type></variable>
+      <variable name="HMI_CircleCount"><type><UINT/></type></variable>
+      <variable name="HMI_StopBusy"><type><BOOL/></type></variable>
+      <variable name="HMI_StopDone"><type><BOOL/></type></variable>
+      <variable name="HMI_ResetBusy"><type><BOOL/></type></variable>
+      <variable name="HMI_ResetDone"><type><BOOL/></type></variable>
+    </globalVars>
+  </configuration></configurations></instances>
+</project>

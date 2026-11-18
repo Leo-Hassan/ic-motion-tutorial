@@ -21,3 +21,5 @@
 阶段三丁继续从相同提交复制 `examples/beremiz_device_mapping/` 的 6 个跟踪文件与 `examples/beremiz_cia402_axis/` 的 7 个跟踪文件；完整 MIT 许可继续由 `examples/v0.0.17/LICENSE.ic-beremiz-motion` 提供。CiA 402 工程仅在 README 去掉两个尾部空格，其工程 XML 和 ST 未改。两个相邻 `*.SOURCE.md` 记录路径、提交、修改和后续替换边界。模拟设备目录仅供离线映射验证，实轴配置 XML 为占位示例，不附真实设备身份、密钥或现场参数。
 
 阶段三戊从 V0.0.17 锁定 `beremiz` 提交 `06f5b1e0e45faecac96d790ab03e57be46d4fd2d` 的 `tests/projects/st_current_value/` 原样复制 3 个工程文件，GPL-2.0-or-later 许可证全文见 `examples/v0.0.17/LICENSE.beremiz-ide`。同目录另写的 `maintenance_debug.st` 为对应三条通用 ST 赋值的最小编译输入，文件头 SPDX MIT；调试工具来自 `ic-matiec-adapter` 提交 `01e4b4897b6d7a002d26169314687e8154f29c5c`，仅调用其脚本与本机库，没有复制上游源码或候选二进制。原路径、修改范围及未来版本边界见相邻来源说明。
+
+阶段三己从 `IGH_RK_1.6-master` 提交 `e6308f19cafe6c591e2dea0c8ba92b0349b746be` 的 `beremiz_projects/is620n_cia402_dual_circle_online/` 复制 11 个跟踪工程文件。`dual_circle_panel.st` 上游文件头为 SPDX MIT；其余 XML 无逐文件 SPDX 声明，本站不擅自给上游增加许可证。两个配置 XML 的本机路径被替换为教学参数，改动与未来替换边界见相邻 `is620n_dual_circle_offline.SOURCE.md`。IgH AArch64 SDK、交叉工具链和包内 EtherCAT 适配源码在调用者环境提供，未复制到教程；不发布主站实现、驱动库、现场凭据或历史硬件报告。

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Cia402RealAxis AxisName="Axis_2" GlobalName="Axis_2" Mode="CSP"
+  CountsPerUnit="1048576.0" MinimumPosition="-0.95"
+  MaximumPosition="0.95" MaximumVelocity="0.125"
+  MaximumAcceleration="0.0625" MaximumDeceleration="0.0625"
+  PeriodSource="PLCTask" PLCPeriodSeconds="0.001" BusPeriodSeconds="0.001"
+  TransportChannel="2" SoftwareZero="true"/>

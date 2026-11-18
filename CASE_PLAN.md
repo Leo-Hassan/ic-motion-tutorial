@@ -1,4 +1,4 @@
-用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：V0.0.17 案例 01～06 已写；LD 原工程通过，取反编辑路径失败，其余主题待逐项验收。
+用途：把目标主题映射到可打开的工程和待执行的验证。当前状态：V0.0.17 案例 01～07 已写；LD 原工程通过，取反编辑路径失败，其余主题待逐项验收。
 
 # 案例覆盖计划
 
@@ -12,7 +12,7 @@
 | 04 | 梯形图编辑与仿真 | `examples/v0.0.17/beremiz_basic_17_ld/` | `plc.xml/MAIN`，实际 `LD` POU | 原工程 Clean Build、真实 IDE Build、保存工程仿真 PASS；触点取反后 Build FAIL（V0.0.17 已知问题） |
 | 05 | 轴配置与限位 | 与 01 共用 `examples/v0.0.17/FirstVirtualAxis/` | `AxisX@VirtualAxis/confnode.xml` 与 `plc.xml/MAIN` | 配置读取、同工程 Clean Build 和范围内虚轴仿真 PASS；越界故障注入 SKIP |
 | 06 | 设备映射与 CiA 402 | `examples/v0.0.17/beremiz_device_mapping/` 与 `beremiz_cia402_axis/` | `device-catalog.json`；`Axis_1@Cia402RealAxis/confnode.xml` | 两工程 Clean Build/GUI Build PASS，模拟映射夹具 3/3 PASS；实轴仿真和实机 SKIP；映射页须补启动环境 |
-| 07 | IS620N 实轴工程离线配置与构建 | `IGH_RK_1.6-master/beremiz_projects/is620n_cia402_dual_circle_online/` | `plc.xml/DualCirclePanel`；双轴配置与 C 扩展 | 只做离线，待敏感信息审查与 Clean Build |
+| 07 | IS620N 实轴工程离线配置与构建 | 教程脱敏 `examples/v0.0.17/is620n_dual_circle_offline/`，原路径 `IGH_RK_1.6-master/beremiz_projects/is620n_cia402_dual_circle_online/` | `plc.xml/DualCirclePanel`；双轴配置与 C 扩展 | 静态配置、包内 AArch64 Clean Build、真实 IDE Build PASS；两产物哈希一致，仿真及实机 SKIP |
 | 08 | 电子齿轮 | `ic-beremiz-motion/examples/beremiz_sync_gear_cam/` | `plc.xml/MAIN`；`Synchronization@SyncConfiguration` | 待验证 |
 | 09 | 电子凸轮 | 同上 | `Cam_A@CamTable`、`Cam_B@CamTable` | 待验证 |
 | 10 | 二维路径 | `ic-beremiz-motion/examples/beremiz_coordinated_path/` | `plc.xml/MAIN`；`MixedPath@PathRecipe` | 待验证 |
