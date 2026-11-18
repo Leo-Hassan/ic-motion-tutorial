@@ -8,7 +8,7 @@
 | 映射工程 | [`examples/v0.0.17/beremiz_device_mapping/`](https://github.com/Leo-Hassan/ic-motion-tutorial/tree/main/examples/v0.0.17/beremiz_device_mapping)，入口 `beremiz.xml` |
 | CiA 402 工程 | [`examples/v0.0.17/beremiz_cia402_axis/`](https://github.com/Leo-Hassan/ic-motion-tutorial/tree/main/examples/v0.0.17/beremiz_cia402_axis)，入口 `beremiz.xml` |
 | 关键 POU / 资源 | 映射：`plc.xml/MAIN`、`device-catalog.json`、`IC Motion@ic_motion/Mapping@DeviceMapping`；实轴：`plc.xml/MAIN`、`IC Motion@ic_motion/Axis_1@Cia402RealAxis/confnode.xml` |
-| 源码提交 | 两个工程均来自 `ic-beremiz-motion` `0867ececc3224815e4f0aae07b76b9581f70cfe4`，分别复制 7 和 6 个跟踪文件 |
+| 源码提交 | 两个工程均来自 `ic-beremiz-motion` `0867ececc3224815e4f0aae07b76b9581f70cfe4`，映射与 CiA 402 分别复制 6 和 7 个跟踪文件 |
 | 验证状态 | 两工程包内 Clean Build 和真实 GUI Build PASS；映射生成周期、工作流、保存工程过程映像 3 项 CTest PASS；实轴仿真与物理 I/O SKIP |
 
 ## 映射工程：查看四个通道

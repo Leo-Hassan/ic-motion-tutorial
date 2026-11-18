@@ -18,4 +18,4 @@
 
 阶段三乙从同一 V0.0.17 扩展提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 原样复制 `examples/beremiz_virtual_axis/` 的 12 个跟踪文件和 `examples/beremiz_basic_17_ld/` 的 6 个跟踪文件到本站相应 V0.0.17 目录；未复制上游构建产物。两者均受 `ic-beremiz-motion` MIT 许可，版权、SPDX、原路径、修改说明和后续版本替换边界见相邻 `*.SOURCE.md`，完整许可见 `examples/v0.0.17/LICENSE.ic-beremiz-motion`。配套 LookAhead 与 LD 保存工程夹具通过包内/锁定源码调用，没有把测试源码、缓存或 `test-results` 纳入本站。
 
-阶段三丁继续从相同提交复制 `examples/beremiz_device_mapping/` 的 7 个跟踪文件与 `examples/beremiz_cia402_axis/` 的 6 个跟踪文件；完整 MIT 许可继续由 `examples/v0.0.17/LICENSE.ic-beremiz-motion` 提供。CiA 402 工程仅在 README 去掉两个尾部空格，其工程 XML 和 ST 未改。两个相邻 `*.SOURCE.md` 记录路径、提交、修改和后续替换边界。模拟设备目录仅供离线映射验证，实轴配置 XML 为占位示例，不附真实设备身份、密钥或现场参数。
+阶段三丁继续从相同提交复制 `examples/beremiz_device_mapping/` 的 6 个跟踪文件与 `examples/beremiz_cia402_axis/` 的 7 个跟踪文件；完整 MIT 许可继续由 `examples/v0.0.17/LICENSE.ic-beremiz-motion` 提供。CiA 402 工程仅在 README 去掉两个尾部空格，其工程 XML 和 ST 未改。两个相邻 `*.SOURCE.md` 记录路径、提交、修改和后续替换边界。模拟设备目录仅供离线映射验证，实轴配置 XML 为占位示例，不附真实设备身份、密钥或现场参数。

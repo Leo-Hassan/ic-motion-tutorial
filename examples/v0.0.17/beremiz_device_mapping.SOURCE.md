@@ -2,4 +2,4 @@
 
 # 来源
 
-`ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_device_mapping/`；只复制 7 个 Git 跟踪文件，包含 `device-catalog.json` 的模拟快照。许可证见同级 `LICENSE.ic-beremiz-motion`，未复制 `build/`、`test-results/` 或设备凭据。
+`ic-beremiz-motion` 提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 的 `examples/beremiz_device_mapping/`；只复制 6 个 Git 跟踪文件，包含 `device-catalog.json` 的模拟快照。许可证见同级 `LICENSE.ic-beremiz-motion`，未复制 `build/`、`test-results/` 或设备凭据。
