@@ -1,6 +1,19 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～13、软件操作与全站本地验收已有证据；LD 触点取反失败，公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～13、本地验收和公开 GitHub Pages 已有证据；LD 触点取反失败，IDE 安装包未公开发布。
 
 # 测试报告
+
+## 阶段五：公开仓库与网站验收（2026-11-19）
+
+| 项目 | 实际结果 |
+| --- | --- |
+| Git 仓库 | `https://github.com/Leo-Hassan/ic-motion-tutorial` 由 `gh repo view` 回查为 `PUBLIC`，默认分支 `main`；首次推送 `35b03ce1dc6be90356cf759a8a54bd67e21204fb` |
+| Pages 设置 | 仓库 Pages API 返回 `build_type=workflow`、`public=true`、`https_enforced=true`，网址 `https://leo-hassan.github.io/ic-motion-tutorial/` |
+| 自动发布 | 首次 Actions 运行 `44408142249` 的 `build` 和 `deploy` 均为 `completed/success`，运行 HEAD 与上述提交一致；工作流构建时执行 `mkdocs build --strict` 和 `scripts/verify_site.py` |
+| 公网内容 | 对公开站点执行 62 个 HTTPS GET/摘要检查：入口、V0.0.17 手册和软件操作、13 案例、V0.0.14 旧版入口、搜索索引及 44 张图片均返回 200；线上索引为 88 条，44 张图片 SHA-256 与本地来源一致 |
+| 公开示例 | 10 份独立 V0.0.17 示例工程的 `beremiz.xml` 从公开仓库 raw 地址均返回 200；案例 08/09 和 11/12/13 共用工程，不重复计工程数 |
+| 浏览器与板端 | 本地真实 Firefox 桌面/手机验收见阶段四；额外公网 headless 截图进程输出 SWGL 映射错误后未生成图片，手工中断，故不计为公网浏览器 PASS。板端 Stop/Transfer/Run、Force、SDO 写入、电机运动和当前版实机验收继续 SKIP |
+
+公开的是教程、工程源文件和真实截图；V0.0.17 IDE 安装包仍是可验证的本地候选，没有公开发布标签或下载地址。案例 04 的取反编辑后构建 FAIL、案例 06 正式启动器映射页路径缺陷均照实保留，不以网站发布成功覆盖软件缺陷。
 
 ## 阶段四：全站本地验收与发布准备（2026-11-19）
 
