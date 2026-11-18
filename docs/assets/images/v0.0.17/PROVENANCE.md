@@ -1,8 +1,10 @@
-用途：记录教程截图的真实来源和版本身份。当前状态：18 张图片均从 V0.0.17 包内真实 wx 窗口直接截取，未绘制或生成界面。
+用途：记录教程截图的真实来源和版本身份。当前状态：24 张图片来自 V0.0.17 包内真实 wx 窗口，未绘制或生成界面。
 
 # V0.0.17 截图来源
 
-2026-11-18 在本机 `DISPLAY=:0` 启动 `ic-platform-V0.0.17-linux-amd64`；启动前包内 `bin/ic-platform --version` 返回 `Industrial Control Platform V0.0.17`。`ps` 回查启动器和 `Beremiz.py` 路径均指向该包。`IC_SKIP_ERPC_TUNNEL=1`，窗口状态栏始终为离线。项目编辑截图从同一包内 `Beremiz.py` 打开教程工程的临时副本；通过真实 XTEST 鼠标和键盘输入展开树、打开编辑页并触发 `Ctrl+Alt+M`。映射页因 V0.0.17 启动器缺模块路径，使用本仓库 `open_mapping_offline.sh` 等价的包内路径补全环境打开真实 IDE；未使用模拟界面。用 wx `ScreenDC` 直接读取屏幕上 IDE 窗口区域为 PNG，未绘制、合成或 AI 生成 UI；`ld-build-recursion-error.png` 仅从同次全屏截图裁剪窗口区域。
+2026-11-18 在本机 `DISPLAY=:0` 启动 `ic-platform-V0.0.17-linux-amd64`；启动前包内 `bin/ic-platform --version` 返回 `Industrial Control Platform V0.0.17`。`ps` 回查启动器和 `Beremiz.py` 路径均指向该包。`IC_SKIP_ERPC_TUNNEL=1`，常规操作窗口状态栏始终为离线。项目编辑截图从同一包内 `Beremiz.py` 打开教程工程的临时副本；通过真实 XTEST 鼠标和键盘输入展开树、打开编辑页并触发 `Ctrl+Alt+M`。映射页因 V0.0.17 启动器缺模块路径，使用本仓库 `open_mapping_offline.sh` 等价的包内路径补全环境打开真实 IDE；未使用模拟界面。前 18 张以 wx `ScreenDC` 读取真实窗口区域；`ld-build-recursion-error.png` 仅从同次全屏截图裁剪窗口区域。
+
+ST 调试六图另由测试程序直接导入**同一 V0.0.17 包内** `BeremizIDE` 创建完整大桥 IDE 窗口，打开教程 ST 工程的临时副本。测试程序在 `127.0.0.1` 启动包内真实 eRPC Runtime，使用本机隔离调试候选，并为无已安装 BootApplication 的回环测试注入与该临时副本 Clean Build 匹配的部署身份。依次调用真实面板的断点、Attach、Step over、Continue、Detach；外部 `gnome-screenshot` 在各 GUI 事件完成后拍全屏并裁剪实际窗口区域。截图中底部 `Disconnected/Online:OFFLINE` 反映没有生产 Runtime 连接；右侧调试状态来自回环服务。所有 24 张均未绘制、合成或 AI 生成 UI。临时 SO、map、会话描述和测试日志未加入仓库。
 
 | 文件 | 对应实际步骤 | SHA-256 |
 | --- | --- | --- |
@@ -24,5 +26,11 @@
 | `cia402-config.png` | 同一轴 Config 页的 CSP、CountsPerUnit 和位置/速度字段 | `609d9f2decc6e3cdf1311ec7952a9fed263a30af02fddebca2fd9b9d3af48e7d` |
 | `cia402-st-editor.png` | 打开实轴示例 ST MAIN，显示五个功能块调用和工程树 | `a78f7d498e216fe6aea2d53f9a54df30a5e58116d4fcbcfe77db241fd53d9b36` |
 | `cia402-build-result.png` | 同实轴工程按 F11，Console 显示 Build 成功和未保存提示 | `16dde471a4e4c91aaebe75c242a05822540b34b4dbd6f87f12d25dd2e710d053` |
+| `st-debug-pending.png` | `MAIN` 第一行断点待绑定、右侧 ST Debug Details | `efcd561d4819d164b41f4b6b89c33bbbb9a61e0690ea482fb4e3c8e9e09aebdd` |
+| `st-debug-breakpoint.png` | 本地主机回环 Attach，停在第一条语句前，`Speed=0` | `225355779f4a3be616ab706f4b1cc176d6df88bea1dca4373d14e1a3ec79023d` |
+| `st-debug-speed10.png` | 第一次 Step over，`Speed=10` | `e6307eb4be6875ad11186bbd9394e132f93f0d2447806311d78c27644132e238` |
+| `st-debug-speed20.png` | 第二次 Step over，`Speed=20`、`ScanCount=0` | `4dd5449d15bcee87e56f93b771394a035ec974218289eaef734c2c5dcc14ac13` |
+| `st-debug-continued.png` | Continue 后在下一扫描的第一条断点停住，`ScanCount=1` | `c3ecd1ae505aab1306a46c48c70002bccaef185ba54400fbf5f90e7c14de3988` |
+| `st-debug-exit.png` | Detach 后 Detached 且 ST 内联值移除 | `ecf90dd943e03aed13606e77d06c57274862c42745b0d277ea37665268e076c7` |
 
 包内结果 JSON 对应 `cycles=3056`、`x=3`、`done=1`、`error=0`、`hardware_operations=0`。生成物和本机临时路径不进入教程仓库。

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BeremizRoot URI_location="ERPC://127.0.0.1:33111">
+  <TargetType><Linux RealTime="false" Compiler="gcc" Linker="gcc"
+                     CFLAGS="-O0 -g -fPIC" LDFLAGS=""/></TargetType>
+  <Libraries Enable_Native_Library="false" Enable_Python_Library="false"/>
+</BeremizRoot>

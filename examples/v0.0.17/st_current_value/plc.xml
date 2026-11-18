@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <fileHeader companyName="Industrial Control Platform"
+              productName="ST Current Value Demo" productVersion="1.0"
+              creationDateTime="2026-09-10T00:00:00"/>
+  <contentHeader name="ST Current Value Demo"
+                 modificationDateTime="2026-09-10T00:00:00">
+    <coordinateInfo>
+      <fbd><scaling x="8" y="8"/></fbd>
+      <ld><scaling x="8" y="8"/></ld>
+      <sfc><scaling x="8" y="8"/></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types><dataTypes/><pous>
+    <pou name="MAIN" pouType="program">
+      <interface><localVars>
+        <variable name="Speed"><type><DINT/></type></variable>
+        <variable name="ScanCount"><type><UDINT/></type></variable>
+      </localVars></interface>
+      <body><ST><xhtml:p><![CDATA[Speed := 10;
+Speed := 20;
+ScanCount := ScanCount + 1;
+]]></xhtml:p></ST></body>
+    </pou>
+  </pous></types>
+  <instances><configurations><configuration name="Config0">
+    <resource name="Res0">
+      <task name="MainTask" priority="0" interval="T#20ms">
+        <pouInstance name="MainInstance" typeName="MAIN"/>
+      </task>
+    </resource>
+  </configuration></configurations></instances>
+</project>

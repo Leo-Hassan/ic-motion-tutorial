@@ -1,4 +1,4 @@
-用途：记录教程网站采用的开源组件与结构参考。当前状态：站点选型完成，V0.0.17 虚轴、LD、设备映射与 CiA 402 示例均保留 MIT 来源。
+用途：记录教程网站采用的开源组件与结构参考。当前状态：站点选型完成，V0.0.17 工程保留 MIT 或 GPL 原始来源。
 
 # 第三方组件与参考
 
@@ -19,3 +19,5 @@
 阶段三乙从同一 V0.0.17 扩展提交 `0867ececc3224815e4f0aae07b76b9581f70cfe4` 原样复制 `examples/beremiz_virtual_axis/` 的 12 个跟踪文件和 `examples/beremiz_basic_17_ld/` 的 6 个跟踪文件到本站相应 V0.0.17 目录；未复制上游构建产物。两者均受 `ic-beremiz-motion` MIT 许可，版权、SPDX、原路径、修改说明和后续版本替换边界见相邻 `*.SOURCE.md`，完整许可见 `examples/v0.0.17/LICENSE.ic-beremiz-motion`。配套 LookAhead 与 LD 保存工程夹具通过包内/锁定源码调用，没有把测试源码、缓存或 `test-results` 纳入本站。
 
 阶段三丁继续从相同提交复制 `examples/beremiz_device_mapping/` 的 6 个跟踪文件与 `examples/beremiz_cia402_axis/` 的 7 个跟踪文件；完整 MIT 许可继续由 `examples/v0.0.17/LICENSE.ic-beremiz-motion` 提供。CiA 402 工程仅在 README 去掉两个尾部空格，其工程 XML 和 ST 未改。两个相邻 `*.SOURCE.md` 记录路径、提交、修改和后续替换边界。模拟设备目录仅供离线映射验证，实轴配置 XML 为占位示例，不附真实设备身份、密钥或现场参数。
+
+阶段三戊从 V0.0.17 锁定 `beremiz` 提交 `06f5b1e0e45faecac96d790ab03e57be46d4fd2d` 的 `tests/projects/st_current_value/` 原样复制 3 个工程文件，GPL-2.0-or-later 许可证全文见 `examples/v0.0.17/LICENSE.beremiz-ide`。同目录另写的 `maintenance_debug.st` 为对应三条通用 ST 赋值的最小编译输入，文件头 SPDX MIT；调试工具来自 `ic-matiec-adapter` 提交 `01e4b4897b6d7a002d26169314687e8154f29c5c`，仅调用其脚本与本机库，没有复制上游源码或候选二进制。原路径、修改范围及未来版本边界见相邻来源说明。

@@ -16,3 +16,5 @@
 `scripts/verify_basic17_ld.sh RELEASE_PACKAGE LD_PROJECT EXPECTED_VERSION` 先核对包版本和所需脚本，随后用包内工具在测试夹具自己的临时目录对指定 LD 工程及包内 ST 对照工程各执行两次 Clean Build 与主机虚轴扫描。输入工程归调用者，夹具持有并清理副本及产物；脚本不连接设备，不在实时线程运行，也不保证多进程并发。参数/包不完整返回 2；夹具失败透传非零退出；成功输出 ST/LD 哈希与 PASS。对修改后的 LD 图形，成功判据仅适用于实际传入的工程内容。
 
 `scripts/open_mapping_offline.sh RELEASE_PACKAGE MAPPING_PROJECT EXPECTED_VERSION` 核对版本、项目和包内映射依赖，补齐 V0.0.17 启动器遗漏的设备目录 Python 路径及校验库路径，然后以 `IC_SKIP_ERPC_TUNNEL=1` 执行包内 `Beremiz.py`。输入工程归调用者，IDE 只在用户主动保存时写工程；脚本本身不复制或改写工程，不连接 Runtime，不在实时线程使用。参数、版本、DISPLAY 或依赖错误返回 2；正常启动后由 GUI 进程决定最终退出码。脚本是 V0.0.17 限定的离线映射页替代入口，不取代发布包的正式启动器门禁。
+
+`scripts/verify_st_debug_loopback.sh RELEASE_PACKAGE PROJECT_DIRECTORY ADAPTER_SOURCE HOST_LIBRARY` 仅用于 V0.0.17。脚本核对包和输入，临时目录持有工具链链接、MATIEC 生成 C、调试 map、候选 SO 与审计清单，退出时清理。源工程、adapter 源码和主机库归调用者；脚本不写入它们。它调用包内真实 wx/eRPC 回环测试验证 ST 当前值 0→10→20、Continue 和 Detach，不连接设备、不开启生产 Runtime，也不在实时线程执行；不提供并发重入保证。缺参数、包、DISPLAY 或依赖返回 2；生成、编译、审计或测试失败返回非零，成功输出 PASS。

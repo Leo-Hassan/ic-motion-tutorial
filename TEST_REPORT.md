@@ -1,6 +1,22 @@
-用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01、02、04 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
+用途：记录教程每一阶段的实际测试、失败与跳过。当前状态：V0.0.17 案例 01～06 与软件操作已有证据；LD 触点取反失败，后续案例、浏览器验收与公开发布待续。
 
 # 测试报告
+
+## 阶段三戊：ST 断点与单步（2026-11-18）
+
+`st_current_value` 的三个工程文件从 V0.0.17 锁定 `beremiz` 提交 `06f5b1e0e45faecac96d790ab03e57be46d4fd2d` 原样复制。另写的 `maintenance_debug.st` 与工程 `MAIN` 的三条赋值一致，仅为候选编译输入。`ic-matiec-adapter` 源码提交 `01e4b4897b6d7a002d26169314687e8154f29c5c`，主机库由相同源码构建；不随教程提交。调试服务仅在主机 `127.0.0.1`，物理输出隔离。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| V0.0.17 包内 Clean Build | 两次 PASS；`VARIABLES.csv` SHA-256 均为 `7cee8bc84447ebe4ee558eb50916ee08be26d39305ff08ace65cfb724e2ad4df`；两次临时路径的 SO 分别为 `0857c153d1a0ce847842924906a38843ebe3c06dd75b5b417fe4de81dbb7bd25` 和 `9ed2b41d6ca49b113976e8f35632cce42429fa497bf8e4a0af3b73bc53077636`，故不声明产物逐字节一致 |
+| 可复现主机回环 | `scripts/verify_st_debug_loopback.sh` 使用包内 MATIEC、锁定 adapter 映射/审计工具和包内 `test_maintenance_debug_erpc_gui.py --current-value`，返回 `real MATIEC + eRPC + wx inline Speed 0 -> 10 -> 20; Continue and Detach PASS`；脚本返回 0 |
+| 完整 IDE 本地回环 | 直接加载 V0.0.17 包内 `BeremizIDE` 的真实 wx 框架，打开从该工程迁移且 Clean Build 的临时副本；本地主机测试夹具给已停止 Runtime 注入匹配的工程身份并用 eRPC 执行 Attach、两次 Step over、Continue 和 Detach。面板读数依次 `Speed=0/10/20`，继续后 `ScanCount=1`；离开为 `Detached` |
+| 真实截图 | 外部 `gnome-screenshot` 在各 GUI 事件返回后截取 6 个实际窗口状态；断点、暂停行、内联值和退出状态可见；6 张 SHA-256 各不相同且与 `PROVENANCE.md` 一致 |
+| 生产监视与板端 | SKIP：未连接生产 Runtime，未作在线只读监视；没有 Connect、Stop、Transfer、Run、Force、SDO 写入或电机运动 |
+
+完整 IDE 回环初次尝试用候选 map generation 7 匹配工程 generation 1，被 Runtime 正确拒绝为 `MAINTENANCE_DEBUG_MAP_MISMATCH`；将本地测试候选的 map、manifest 与实际工程构建身份绑定后通过。第二次测试脚本缺少 `if __name__ == "__main__"` 保护，隔离调试子进程 spawn 重入，出现 `MAINTENANCE_DEBUG_COMMAND_TIMEOUT`；修正入口后通过。自动截图初次在同一 GUI 事件回调中抓取，得到未刷新的旧画面；改为独立桌面截图进程在事件返回后截取并逐图检查，旧图未进入仓库。这些是测试夹具准备和采集失败，不计作最终调试 PASS。包内真实 GUI 的正式生产调试流程未验证。
+
+本站阶段三戊 `PYTHONPATH=.deps python3 -m mkdocs build --strict` 返回 0，生成 13 个 HTML 章节页，53 条搜索索引记录。静态扫描 381 条站内页面/资源链接，缺失 0；24 张 V0.0.17 PNG 的 SHA-256 与来源表逐项匹配，6 张 ST 调试图彼此不同。`sh -n scripts/verify_st_debug_loopback.sh` 和 `git diff --check` 返回 0。浏览器桌面/手机及公开发布尚未执行。
 
 ## 阶段三丁：设备映射与 CiA 402（2026-11-18）
 
