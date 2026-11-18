@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VirtualAxis AxisName="Axis_2" InitialPosition="0.0"
+             MinimumPosition="-200.0" MaximumPosition="200.0"
+             MaximumVelocity="20.0" PeriodSeconds="0.001"
+             GlobalName="Axis_2"/>

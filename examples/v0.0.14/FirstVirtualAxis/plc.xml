@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6_0201">
+  <fileHeader companyName="Industrial Control Platform" productName="Motion Preview" productVersion="1" creationDateTime="2026-11-18T10:38:49"/>
+  <contentHeader name="FirstVirtualAxis" version="1" modificationDateTime="2026-11-18T10:38:50">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="8" y="8"/>
+      </fbd>
+      <ld>
+        <scaling x="8" y="8"/>
+      </ld>
+      <sfc>
+        <scaling x="8" y="8"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <externalVars>
+            <variable name="AxisX">
+              <type>
+                <derived name="AXIS_REF"/>
+              </type>
+            </variable>
+          </externalVars>
+          <localVars>
+            <variable name="PowerX">
+              <type>
+                <derived name="MC_Power"/>
+              </type>
+            </variable>
+            <variable name="ReadX">
+              <type>
+                <derived name="MC_ReadActualPosition"/>
+              </type>
+            </variable>
+            <variable name="AxisXTrace">
+              <type>
+                <derived name="MC_AxisTrace"/>
+              </type>
+            </variable>
+            <variable name="Distance">
+              <type>
+                <LREAL/>
+              </type>
+              <initialValue>
+                <simpleValue value="3.0"/>
+              </initialValue>
+            </variable>
+            <variable name="Velocity">
+              <type>
+                <LREAL/>
+              </type>
+              <initialValue>
+                <simpleValue value="1.0"/>
+              </initialValue>
+            </variable>
+            <variable name="GearRatio">
+              <type>
+                <LREAL/>
+              </type>
+              <initialValue>
+                <simpleValue value="2.0"/>
+              </initialValue>
+            </variable>
+            <variable name="CamAmplitude">
+              <type>
+                <LREAL/>
+              </type>
+              <initialValue>
+                <simpleValue value="0.5"/>
+              </initialValue>
+            </variable>
+            <variable name="State">
+              <type>
+                <UINT/>
+              </type>
+            </variable>
+            <variable name="Done">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <UDINT/>
+              </type>
+            </variable>
+            <variable name="AxisMove">
+              <type>
+                <derived name="MC_MoveAbsolute"/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p><![CDATA[(* Motion Preview: offline VirtualAxis, fixed 1 ms. *)
+(* Edit parameters in the variable table; edit this ST freely. *)
+PowerX(Axis := AxisX, Enable := NOT Error);
+IF (State = 0) AND PowerX.Status THEN State := 10; END_IF;
+AxisMove(Axis := AxisX, Execute := State = 10,
+     Position := Distance, Velocity := Velocity, Acceleration := 20.0, Deceleration := 20.0);
+IF AxisMove.Done THEN State := 30; END_IF;
+Done := State = 30;
+ReadX(Axis := AxisX, Enable := TRUE);
+AxisXTrace(Axis := AxisX, Enable := TRUE, Reset := FALSE, ReadIndex := 0);
+IF PowerX.Error AND NOT Error THEN Error := TRUE; ErrorID := PowerX.ErrorID; END_IF;
+IF ReadX.Error AND NOT Error THEN Error := TRUE; ErrorID := ReadX.ErrorID; END_IF;
+IF AxisMove.Error AND NOT Error THEN Error := TRUE; ErrorID := AxisMove.ErrorID; END_IF;
+]]></xhtml:p>
+          </ST>
+        </body>
+      </pou>
+      <pou name="BasicLD" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="Input">
+              <type>
+                <BOOL/>
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE"/>
+              </initialValue>
+            </variable>
+            <variable name="Output">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <LD>
+            <leftPowerRail localId="1" width="32" height="24">
+              <position x="24" y="32"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="32" y="12"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="2" width="32" height="24" negated="false">
+              <position x="88" y="32"/>
+              <connectionPointIn>
+                <relPosition x="0" y="12"/>
+                <connection refLocalId="1"/>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="32" y="12"/>
+              </connectionPointOut>
+              <variable>Input</variable>
+            </contact>
+            <coil localId="3" width="32" height="24" negated="false">
+              <position x="184" y="32"/>
+              <connectionPointIn>
+                <relPosition x="0" y="12"/>
+                <connection refLocalId="2"/>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="32" y="12"/>
+              </connectionPointOut>
+              <variable>Output</variable>
+            </coil>
+            <rightPowerRail localId="4" width="32" height="24">
+              <position x="272" y="32"/>
+              <connectionPointIn>
+                <relPosition x="0" y="12"/>
+                <connection refLocalId="3"/>
+              </connectionPointIn>
+            </rightPowerRail>
+          </LD>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="config">
+        <resource name="resource1">
+          <task name="MotionTask" priority="0" interval="T#1ms">
+            <pouInstance name="MAIN0" typeName="MAIN"/>
+            <pouInstance name="LD0" typeName="BasicLD"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

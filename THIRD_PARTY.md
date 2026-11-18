@@ -1,4 +1,4 @@
-用途：记录教程网站采用的开源组件与结构参考。当前状态：阶段一选型完成，尚未复制第三方源码。
+用途：记录教程网站采用的开源组件与结构参考。当前状态：站点选型完成，已复制 MIT 许可的工作区虚轴示例并保留出处。
 
 # 第三方组件与参考
 
@@ -9,3 +9,7 @@
 | 野火教程网站 | “入口 → 手册 → 章节”阅读结构参考 | [野火资料入口](https://doc.embedfire.com/)；未复制文字、图片或代码 |
 
 后续若复制工作区示例源码，会逐工程记录原仓库、提交、路径、许可证和改动；不复制 `test-results`、`build`、密钥或内部配置。
+
+阶段二已从 `ic-beremiz-motion` 提交 `29ca588ca3e1190acf751e9e3353a30d5222f44d` 复制 `examples/beremiz_virtual_axis/` 至 `examples/v0.0.14/virtual_axis/`。上游版权为 2026 Industrial Control Platform contributors，SPDX 为 MIT，完整许可证随示例保留。原路径、改动和未来替换边界见示例内 `SOURCE.md`；未复制上游 `build/`。
+
+同一提交的 `beremiz_extension/ic_motion/preview_project.py` 经 V0.0.14 包内工具生成 `examples/v0.0.14/FirstVirtualAxis/`。工程 XML 和清单未手改，MIT 许可证与出处说明置于相邻文件，不破坏项目清单；参数与替换边界见 `FirstVirtualAxis.SOURCE.md`。
