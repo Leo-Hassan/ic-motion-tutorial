@@ -1,0 +1,13 @@
+:root {
+  --md-primary-fg-color: #263b67;
+  --md-accent-fg-color: #006f9d;
+}
+.md-typeset h1 { font-weight: 700; letter-spacing: .01em; }
+.md-typeset .intro { font-size: 1.05rem; max-width: 48rem; }
+.md-typeset .version-badge {
+  display: inline-block; padding: .2rem .55rem; border-radius: .25rem;
+  background: #e6eef9; color: #1f3c68; font-weight: 700;
+}
+@media (max-width: 44.9em) {
+  .md-typeset .intro { font-size: .95rem; }
+}

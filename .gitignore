@@ -1,0 +1,13 @@
+.venv/
+.deps/
+site/
+__pycache__/
+*.pyc
+.cache/
+test-results/
+build/
+Testing/
+psk/
+*.so
+*.pem
+*.key

@@ -1,0 +1,37 @@
+site_name: 大桥 IDE / IC Motion 中文教程
+site_description: 面向外部读者的版本化离线编程与仿真教程
+site_url: https://Leo-Hassan.github.io/ic-motion-tutorial/
+docs_dir: docs
+site_dir: site
+use_directory_urls: true
+theme:
+  name: material
+  language: zh
+  palette:
+    primary: indigo
+    accent: blue
+  features:
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+extra_css:
+  - assets/stylesheets/extra.css
+nav:
+  - 教程入口: index.md
+  - V0.0.14 手册:
+      - 手册首页: v0.0.14/index.md
+      - 版本与证据: v0.0.14/versions.md
